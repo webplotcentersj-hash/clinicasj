@@ -1433,6 +1433,12 @@ function GeminiAssistant() {
         }),
       });
 
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: "Error desconocido" }));
+        console.error("Error en respuesta de API:", errorData);
+        throw new Error(errorData.error || "Error al comunicarse con el servidor");
+      }
+
       const data = await response.json();
 
       if (data.success && data.message) {
@@ -1442,11 +1448,11 @@ function GeminiAssistant() {
         if (autoSpeak) speakText(data.message);
       } else {
         // Fallback a base de conocimiento
-        throw new Error("Gemini no disponible");
+        throw new Error(data.error || "Gemini no disponible");
       }
-    } catch (error) {
+    } catch (error: any) {
       // Fallback a base de conocimiento si Gemini falla
-      console.log("Usando base de conocimiento como fallback:", error);
+      console.error("Error al usar Gemini, usando base de conocimiento como fallback:", error);
       const botResponseText = findBestResponse(currentInput);
       const botMsg = { id: Date.now() + 1, text: botResponseText, sender: "bot" as const };
       setMessages((prev) => [...prev, botMsg]);

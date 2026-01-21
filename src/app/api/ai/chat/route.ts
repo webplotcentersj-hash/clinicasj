@@ -158,13 +158,19 @@ export async function POST(request: NextRequest) {
 
     const ai = new GoogleGenAI({ apiKey });
 
-    // Construir el contenido con historial de conversación
-    // Si hay historial, construir array de mensajes; si no, usar string simple
+    // Construir el contenido: siempre incluir el contexto del sistema al inicio
+    // Si hay historial, construir array de mensajes; si no, usar string simple con contexto
     let contents: string | Array<{ role: string; parts: Array<{ text: string }> }>;
     
     if (conversationHistory.length > 0) {
       // Construir array de mensajes con historial
-      const historyArray: Array<{ role: string; parts: Array<{ text: string }> }> = [];
+      // Incluir el contexto del sistema como primer mensaje del sistema
+      const historyArray: Array<{ role: string; parts: Array<{ text: string }> }> = [
+        {
+          role: "user",
+          parts: [{ text: SYSTEM_CONTEXT }],
+        }
+      ];
       
       conversationHistory.forEach((msg: { role: string; content: string }) => {
         historyArray.push({
@@ -185,24 +191,33 @@ export async function POST(request: NextRequest) {
       contents = `${SYSTEM_CONTEXT}\n\nUsuario: ${message}`;
     }
 
-    const response = await ai.models.generateContent({
-      model: "gemini-1.5-flash",
-      contents: contents,
-    });
+    try {
+      const response = await ai.models.generateContent({
+        model: "gemini-1.5-flash",
+        contents: contents,
+      });
 
-    const text = response.text;
+      const text = response.text || response.candidates?.[0]?.content?.parts?.[0]?.text || "Lo siento, no pude generar una respuesta.";
 
-    return NextResponse.json({ 
-      message: text,
-      success: true 
-    });
+      return NextResponse.json({ 
+        message: text,
+        success: true 
+      });
+    } catch (apiError: any) {
+      console.error("Error específico en Gemini API:", apiError);
+      throw apiError;
+    }
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error en Gemini API:", error);
+    console.error("Detalles del error:", error.message, error.stack);
+    
+    // Retornar error más descriptivo para debugging
     return NextResponse.json(
       { 
-        error: "Error al procesar tu consulta. Por favor intenta nuevamente.",
-        success: false 
+        error: error.message || "Error al procesar tu consulta. Por favor intenta nuevamente.",
+        success: false,
+        details: process.env.NODE_ENV === "development" ? error.message : undefined
       },
       { status: 500 },
     );
