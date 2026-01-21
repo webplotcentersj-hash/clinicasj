@@ -1233,16 +1233,19 @@ function Technology() {
           <div className="group relative md:w-1/2">
             <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-r from-[#447FC1] to-[#9FCD5A] opacity-30 blur-lg transition duration-1000 group-hover:opacity-50" />
             <div className="relative overflow-hidden rounded-[2rem] shadow-2xl">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1000&q=80"
-                alt="Tecnología Médica"
-                className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#447FC1]/80 to-transparent opacity-60" />
-              <div className="absolute bottom-8 left-8 text-white">
-                <p className="mb-1 text-lg font-bold">Tecnología Philips</p>
-                <p className="text-sm opacity-80">Brilliance 64 Cortes</p>
+              <div className="relative aspect-video w-full">
+                <iframe
+                  src="https://www.youtube.com/embed/ovv5dDsEoC4?autoplay=1&mute=1&loop=1&playlist=ovv5dDsEoC4&controls=0&modestbranding=1&rel=0"
+                  className="absolute inset-0 h-full w-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title="Innovación que Salva Vidas - Sanatorio San Juan"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#447FC1]/80 to-transparent opacity-60" />
+                <div className="absolute bottom-8 left-8 text-white">
+                  <p className="mb-1 text-lg font-bold">Tecnología Philips</p>
+                  <p className="text-sm opacity-80">Brilliance 64 Cortes</p>
+                </div>
               </div>
             </div>
           </div>
