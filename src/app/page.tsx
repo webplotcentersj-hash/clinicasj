@@ -480,6 +480,14 @@ function Services() {
             Excelencia Médica <span className="text-[#9FCD5A]">Integral</span>
           </h2>
           <div className="mx-auto h-1.5 w-24 rounded-full bg-gradient-to-r from-[#447FC1] to-[#9FCD5A]" />
+
+          <a
+            href="#contacto"
+            className="group mx-auto mt-8 inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#447FC1] bg-white px-7 py-3 text-sm font-extrabold uppercase tracking-wide text-[#447FC1] shadow-sm transition-all hover:-translate-y-0.5 hover:bg-[#447FC1] hover:text-white hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-[#447FC1]/25"
+          >
+            Ver todas las especialidades
+            <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+          </a>
         </div>
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
