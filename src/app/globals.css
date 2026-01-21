@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0b1220;
+  --card: #ffffff;
+  --card-foreground: #0b1220;
+
+  --muted: #f2f5fb;
+  --muted-foreground: #475569;
+
+  --primary: #0b4aa2;
+  --primary-foreground: #ffffff;
+  --accent: #10b981;
+  --accent-foreground: #052e2b;
+
+  --border: rgba(2, 6, 23, 0.12);
+  --ring: rgba(11, 74, 162, 0.35);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #070a12;
+    --foreground: #eef2ff;
+    --card: rgba(15, 23, 42, 0.6);
+    --card-foreground: #eef2ff;
+    --muted: rgba(15, 23, 42, 0.6);
+    --muted-foreground: #a8b3cf;
+    --border: rgba(148, 163, 184, 0.22);
+    --ring: rgba(59, 130, 246, 0.35);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, Segoe UI, Roboto,
+    Ubuntu, Cantarell, Noto Sans, sans-serif;
+}
