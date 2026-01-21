@@ -476,6 +476,119 @@ const ESPECIALIDADES = [
   "Psicología",
 ] as const;
 
+const ESPECIALIDADES_DETALLE: Record<(typeof ESPECIALIDADES)[number], string> = {
+  "Ecografía General": "Diagnóstico por imágenes no invasivo para evaluar órganos y tejidos.",
+  Neurocirugía: "Atención especializada de patologías del sistema nervioso central y periférico.",
+  Gastroenterología: "Diagnóstico y tratamiento de enfermedades del aparato digestivo.",
+  Urología: "Prevención, diagnóstico y tratamiento del aparato urinario y reproductor masculino.",
+  Nefrología: "Cuidado integral de la salud renal y control de enfermedades crónicas.",
+  Diabetología: "Seguimiento y control de diabetes con enfoque integral y preventivo.",
+  Nutrición: "Planes personalizados para salud, rendimiento y patologías específicas.",
+  Cardiología: "Evaluación cardiovascular, prevención y tratamientos de alta complejidad.",
+  "Eco Doppler Color": "Estudio vascular y cardíaco con tecnología Doppler para mayor precisión.",
+  "Fisio Kinesiología": "Rehabilitación y recuperación funcional con profesionales especializados.",
+  "Cirugía General": "Cirugías programadas y de urgencia con equipo quirúrgico experimentado.",
+  Obesidad: "Abordaje interdisciplinario para el tratamiento integral de la obesidad.",
+  "Educación Física Adaptada a la Salud": "Actividad física guiada, segura y personalizada según condición.",
+  Pediatría: "Atención médica integral para niños y adolescentes.",
+  "Clínica Médica": "Consultas y seguimiento general con enfoque preventivo y clínico.",
+  "Medicina del Trabajo": "Controles laborales, aptitud y prevención en salud ocupacional.",
+  Traumatología: "Diagnóstico y tratamiento de lesiones óseas, musculares y articulares.",
+  Ginecología: "Salud integral de la mujer: controles, prevención y tratamientos.",
+  Psicología: "Acompañamiento profesional para bienestar emocional y salud mental.",
+};
+
+function EspecialidadesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [query, setQuery] = useState("");
+  if (!isOpen) return null;
+
+  const normalized = (s: string) =>
+    s
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+  const q = normalized(query.trim());
+  const items = ESPECIALIDADES.filter((e) => (q ? normalized(e).includes(q) : true));
+
+  return (
+    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative w-full max-w-5xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+        <div className="relative border-b border-gray-100 bg-white p-6">
+          <button
+            onClick={onClose}
+            className="absolute right-6 top-6 rounded-full bg-gray-100 p-2 text-gray-600 transition-colors hover:bg-gray-200"
+            type="button"
+            aria-label="Cerrar"
+          >
+            <X size={20} />
+          </button>
+
+          <div className="flex flex-col items-center gap-3 text-center">
+            <span className="rounded-full bg-[#447FC1]/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#447FC1]">
+              Especialidades
+            </span>
+            <h3 className="text-2xl font-extrabold text-[#727376] md:text-3xl">
+              Encontrá la especialidad que necesitás
+            </h3>
+            <div className="mt-2 w-full max-w-md">
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Buscar (ej: cardio, pediatría, eco...)"
+                className="w-full rounded-full border border-gray-200 bg-white px-5 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="max-h-[70vh] overflow-y-auto p-6">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((esp) => (
+              <div
+                key={esp}
+                className="group relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-6 shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl"
+              >
+                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[#9FCD5A]/15 blur-2xl transition-opacity group-hover:opacity-80" />
+                <div className="absolute -left-10 -bottom-10 h-32 w-32 rounded-full bg-[#447FC1]/15 blur-2xl transition-opacity group-hover:opacity-80" />
+
+                <div className="relative flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#447FC1] text-white shadow-sm">
+                    <Stethoscope size={22} />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-extrabold text-[#727376] group-hover:text-[#447FC1]">{esp}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-500">{ESPECIALIDADES_DETALLE[esp]}</p>
+                  </div>
+                </div>
+
+                <div className="relative mt-5 flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#9FCD5A]">Disponible</span>
+                  <a
+                    href="#contacto"
+                    onClick={onClose}
+                    className="inline-flex items-center gap-2 text-sm font-bold text-[#447FC1] transition-all hover:gap-3 hover:underline"
+                  >
+                    Consultar <ArrowRight size={16} />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {items.length === 0 && (
+            <div className="py-16 text-center">
+              <p className="text-lg font-bold text-[#727376]">No encontramos coincidencias.</p>
+              <p className="mt-2 text-sm text-gray-500">Probá con otro término (ej: “eco”, “clínica”, “gine”).</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const KNOWLEDGE_BASE = [
   {
     keywords: ["hola", "buen dia", "buenas", "inicio", "empezar"],
@@ -993,8 +1106,14 @@ function ServiceCard({
 }
 
 function Services() {
+  const [showEspecialidadesModal, setShowEspecialidadesModal] = useState(false);
+
   return (
     <section className="relative overflow-hidden bg-gray-50 pb-24 pt-24" id="especialidades">
+      <EspecialidadesModal
+        isOpen={showEspecialidadesModal}
+        onClose={() => setShowEspecialidadesModal(false)}
+      />
       <div className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-hidden opacity-30">
         <div className="absolute left-10 top-20 h-64 w-64 rounded-full bg-[#447FC1]/10 blur-3xl" />
         <div className="absolute bottom-20 right-10 h-96 w-96 rounded-full bg-[#9FCD5A]/10 blur-3xl" />
@@ -1014,6 +1133,7 @@ function Services() {
             <button
               className="group flex w-full items-center justify-center gap-3 rounded-full bg-[#9FCD5A] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50 md:w-auto"
               type="button"
+              onClick={() => setShowEspecialidadesModal(true)}
             >
               <Calendar className="transition-transform group-hover:rotate-12" />
               Ver todas las especialidades
