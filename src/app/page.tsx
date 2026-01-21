@@ -249,7 +249,7 @@ function LocationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
           {/* Mapa embebido */}
           <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.5!2d-68.5364!3d-31.5375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMyJzE1LjAiUyA2OMKwMzInMTEuMCJX!5e0!3m2!1ses!2sar!4v1234567890&q=Gral.+Juan+Lavalle+735,+J5400+San+Juan,+San+Juan+Province,+Argentina"
+              src="https://www.google.com/maps?q=Gral.+Juan+Lavalle+735,+J5400+San+Juan,+Argentina&output=embed"
               width="100%"
               height="300"
               style={{ border: 0 }}
