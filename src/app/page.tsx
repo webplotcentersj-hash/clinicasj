@@ -918,12 +918,12 @@ function Hero() {
 
       {/* Logo a la derecha y centrado verticalmente */}
       <div className="absolute right-6 top-1/2 z-30 -translate-y-1/2 md:right-12">
-        <div className="rounded-2xl bg-white/20 p-6 backdrop-blur-md shadow-2xl ring-2 ring-white/30">
+        <div className="rounded-2xl bg-black/40 p-6 backdrop-blur-lg shadow-2xl ring-2 ring-white/20">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/ssj-logo-header.png"
             alt="Sanatorio San Juan"
-            className="h-28 w-auto md:h-40"
+            className="h-28 w-auto brightness-110 contrast-110 md:h-40"
           />
         </div>
       </div>
