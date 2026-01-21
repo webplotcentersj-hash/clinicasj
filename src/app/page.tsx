@@ -1,6 +1,56 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+
+// Tipos para Speech Recognition API
+interface SpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start(): void;
+  stop(): void;
+  onstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
+  onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => any) | null;
+  onend: ((this: SpeechRecognition, ev: Event) => any) | null;
+}
+
+interface SpeechRecognitionEvent extends Event {
+  results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+  error: string;
+}
+
+interface SpeechRecognitionResultList {
+  length: number;
+  item(index: number): SpeechRecognitionResult;
+  [index: number]: SpeechRecognitionResult;
+}
+
+interface SpeechRecognitionResult {
+  length: number;
+  item(index: number): SpeechRecognitionAlternative;
+  [index: number]: SpeechRecognitionAlternative;
+  isFinal: boolean;
+}
+
+interface SpeechRecognitionAlternative {
+  transcript: string;
+  confidence: number;
+}
+
+declare global {
+  interface Window {
+    webkitSpeechRecognition: {
+      new (): SpeechRecognition;
+    };
+    SpeechRecognition: {
+      new (): SpeechRecognition;
+    };
+  }
+}
 import {
   Activity,
   ArrowRight,
@@ -1249,13 +1299,97 @@ function GeminiAssistant() {
   ]);
   const [inputText, setInputText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [recognitionError, setRecognitionError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(scrollToBottom, [messages, isOpen]);
+
+  // Inicializar reconocimiento de voz
+  useEffect(() => {
+    if (typeof window !== "undefined" && "webkitSpeechRecognition" in window) {
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      const recognition = new SpeechRecognition();
+      
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = "es-AR"; // Español argentino
+      
+      recognition.onstart = () => {
+        setIsListening(true);
+        setRecognitionError(null);
+      };
+      
+      recognition.onresult = (event: SpeechRecognitionEvent) => {
+        const transcript = Array.from(event.results)
+          .map((result) => result[0].transcript)
+          .join("");
+        setInputText((prev) => prev + (prev ? " " : "") + transcript);
+        setIsListening(false);
+      };
+      
+      recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+        console.error("Error de reconocimiento:", event.error);
+        setIsListening(false);
+        
+        switch (event.error) {
+          case "no-speech":
+            setRecognitionError("No se detectó voz. Intenta nuevamente.");
+            break;
+          case "audio-capture":
+            setRecognitionError("No se pudo acceder al micrófono. Verifica los permisos.");
+            break;
+          case "not-allowed":
+            setRecognitionError("Permiso de micrófono denegado. Actívalo en la configuración del navegador.");
+            break;
+          default:
+            setRecognitionError("Error al reconocer voz. Intenta nuevamente.");
+        }
+        
+        setTimeout(() => setRecognitionError(null), 5000);
+      };
+      
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+      
+      recognitionRef.current = recognition;
+    }
+    
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, []);
+
+  const startListening = () => {
+    if (!recognitionRef.current) {
+      setRecognitionError("El reconocimiento de voz no está disponible en tu navegador. Usa Chrome o Edge.");
+      setTimeout(() => setRecognitionError(null), 5000);
+      return;
+    }
+    
+    try {
+      recognitionRef.current.start();
+    } catch (error) {
+      console.error("Error al iniciar reconocimiento:", error);
+      setRecognitionError("Error al iniciar el micrófono. Intenta nuevamente.");
+      setTimeout(() => setRecognitionError(null), 5000);
+    }
+  };
+
+  const stopListening = () => {
+    if (recognitionRef.current && isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    }
+  };
 
   const speakText = (text: string) => {
     if (!("speechSynthesis" in window)) return;
@@ -1408,26 +1542,48 @@ function GeminiAssistant() {
           </div>
 
           <div className="border-t border-gray-100 bg-white p-4">
+            {recognitionError && (
+              <div className="mb-2 rounded-lg bg-red-50 p-2 text-xs text-red-600">
+                {recognitionError}
+              </div>
+            )}
             <div className="flex items-center gap-2 rounded-full border border-transparent bg-gray-100 px-2 py-2 pl-4 transition-all focus-within:border-[#447FC1] focus-within:bg-white">
               <input
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                placeholder="Pregunta sobre turnos, guardia..."
+                placeholder={isListening ? "Escuchando..." : "Pregunta sobre turnos, guardia..."}
                 className="flex-1 bg-transparent text-sm text-gray-700 outline-none placeholder-gray-400"
+                disabled={isListening}
               />
-              <button className="rounded-full p-2 text-gray-400 transition-colors hover:bg-gray-100 hover:text-[#447FC1]" type="button">
-                <Mic size={18} />
+              <button
+                onClick={isListening ? stopListening : startListening}
+                className={`rounded-full p-2 transition-all ${
+                  isListening
+                    ? "bg-red-100 text-red-600 animate-pulse"
+                    : "text-gray-400 hover:bg-gray-100 hover:text-[#447FC1]"
+                }`}
+                type="button"
+                title={isListening ? "Detener grabación" : "Hablar con el micrófono"}
+              >
+                <Mic size={18} className={isListening ? "animate-pulse" : ""} />
               </button>
               <button
                 onClick={handleSend}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#9FCD5A] text-white transition-all hover:bg-[#8ec049] hover:shadow-lg active:scale-95"
+                disabled={!inputText.trim() || isListening}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#9FCD5A] text-white transition-all hover:bg-[#8ec049] hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                 type="button"
               >
                 <Send size={16} />
               </button>
             </div>
+            {isListening && (
+              <div className="mt-2 flex items-center justify-center gap-2">
+                <div className="h-2 w-2 animate-pulse rounded-full bg-red-500" />
+                <span className="text-xs text-red-600">Grabando... Habla ahora</span>
+              </div>
+            )}
             <div className="mt-2 text-center">
               <span className="text-[10px] text-gray-400">Powered by Plot Center Technology</span>
             </div>
