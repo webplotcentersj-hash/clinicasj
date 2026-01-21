@@ -33,6 +33,14 @@ function TurnosModal({
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
   const [turnosDisponibles, setTurnosDisponibles] = useState<Array<{ hora: string; disponible: boolean }>>([]);
+  const [showDoctorModal, setShowDoctorModal] = useState(false);
+  const [selectedDoctor, setSelectedDoctor] = useState<{
+    nombre: string;
+    apellido: string;
+    especialidad: string;
+    foto: string;
+    matricula: string;
+  } | null>(null);
 
   const [form, setForm] = useState({
     nombre: "",
@@ -45,6 +53,49 @@ function TurnosModal({
     franja: "indistinto" as "mañana" | "tarde" | "indistinto",
     comentario: "",
   });
+
+  // Simular doctores por especialidad
+  const getDoctorForSpecialty = (especialidad: string) => {
+    const doctors: Record<string, { nombre: string; apellido: string; especialidad: string; foto: string; matricula: string }> = {
+      "Cardiología": {
+        nombre: "Carlos",
+        apellido: "Rodríguez",
+        especialidad: "Cardiología",
+        foto: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop",
+        matricula: "MP 12345",
+      },
+      "Pediatría": {
+        nombre: "María",
+        apellido: "González",
+        especialidad: "Pediatría",
+        foto: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop",
+        matricula: "MP 23456",
+      },
+      "Traumatología": {
+        nombre: "Juan",
+        apellido: "Martínez",
+        especialidad: "Traumatología",
+        foto: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop",
+        matricula: "MP 34567",
+      },
+      "Ginecología": {
+        nombre: "Ana",
+        apellido: "López",
+        especialidad: "Ginecología",
+        foto: "https://images.unsplash.com/photo-1594824476966-48cb8cbc905b?w=400&h=400&fit=crop",
+        matricula: "MP 45678",
+      },
+    };
+    return (
+      doctors[especialidad] || {
+        nombre: "Dr.",
+        apellido: "Profesional",
+        especialidad: especialidad,
+        foto: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&h=400&fit=crop",
+        matricula: "MP 00000",
+      }
+    );
+  };
 
   // Generar turnos disponibles de ejemplo cuando se selecciona especialidad y fecha
   useEffect(() => {
@@ -78,8 +129,6 @@ function TurnosModal({
     setStatus("idle");
     setError(null);
   }, [isOpen]);
-
-  if (!isOpen) return null;
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,10 +168,72 @@ function TurnosModal({
       setForm((prev) => ({ ...prev, [key]: value }));
     };
 
+  if (!isOpen) return null;
+
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+    <>
+      {/* Modal del Doctor */}
+      {showDoctorModal && selectedDoctor && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowDoctorModal(false)} />
+          <div className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white shadow-2xl">
+            <div className="relative h-48 bg-gradient-to-br from-[#447FC1] to-[#9FCD5A]">
+              <button
+                onClick={() => setShowDoctorModal(false)}
+                className="absolute right-4 top-4 z-10 rounded-full bg-white/20 p-2 text-white backdrop-blur-md transition-colors hover:bg-white/30"
+                type="button"
+              >
+                <X size={20} />
+              </button>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
+                <div className="relative h-32 w-32 overflow-hidden rounded-full border-4 border-white shadow-xl">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={selectedDoctor.foto} alt={`${selectedDoctor.nombre} ${selectedDoctor.apellido}`} className="h-full w-full object-cover" />
+                </div>
+              </div>
+            </div>
+            <div className="mt-16 space-y-4 p-6 pb-8 text-center">
+              <div>
+                <h3 className="text-2xl font-extrabold text-[#727376]">
+                  {selectedDoctor.nombre} {selectedDoctor.apellido}
+                </h3>
+                <p className="mt-1 text-sm font-semibold text-[#447FC1]">{selectedDoctor.especialidad}</p>
+                <p className="mt-1 text-xs text-gray-500">{selectedDoctor.matricula}</p>
+              </div>
+              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+                <p className="text-sm text-gray-600">
+                  Profesional disponible para atención en <strong>{form.especialidad}</strong>
+                </p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => {
+                    setShowDoctorModal(false);
+                    // Aquí podrías pre-seleccionar el turno si quisieras
+                  }}
+                  className="w-full rounded-full bg-[#9FCD5A] px-6 py-3 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50"
+                  type="button"
+                >
+                  Confirmar turno con este profesional
+                </button>
+                <button
+                  onClick={() => setShowDoctorModal(false)}
+                  className="w-full rounded-full border-2 border-[#447FC1] bg-white px-6 py-3 text-base font-bold text-[#447FC1] transition-all hover:bg-[#447FC1] hover:text-white"
+                  type="button"
+                >
+                  Ver otros horarios
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Turnos */}
+      {isOpen && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+          <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
         <div className="flex items-center justify-between border-b border-gray-100 bg-white p-6">
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-[#447FC1]">Turnos</p>
@@ -267,7 +378,11 @@ function TurnosModal({
                         key={idx}
                         type="button"
                         onClick={() => {
-                          // Aquí podrías seleccionar el turno si quisieras
+                          if (turno.disponible) {
+                            const doctor = getDoctorForSpecialty(form.especialidad);
+                            setSelectedDoctor(doctor);
+                            setShowDoctorModal(true);
+                          }
                         }}
                         disabled={!turno.disponible}
                         className={`rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
@@ -315,9 +430,11 @@ function TurnosModal({
               </div>
             </form>
           )}
+          </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
