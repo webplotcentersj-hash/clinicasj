@@ -23,6 +23,240 @@ import {
   X,
 } from "lucide-react";
 
+function TurnosModal({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  const [form, setForm] = useState({
+    nombre: "",
+    apellido: "",
+    dni: "",
+    telefono: "",
+    email: "",
+    especialidad: "",
+    fechaPreferida: "",
+    franja: "indistinto" as "mañana" | "tarde" | "indistinto",
+    comentario: "",
+  });
+
+  useEffect(() => {
+    if (!isOpen) return;
+    setStatus("idle");
+    setError(null);
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("submitting");
+    setError(null);
+
+    try {
+      const res = await fetch("/api/turnos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        setStatus("error");
+        setError(body?.error ?? "No se pudo enviar el turno. Revisá los datos.");
+        return;
+      }
+
+      setStatus("success");
+    } catch {
+      setStatus("error");
+      setError("Error de red. Probá de nuevo.");
+    }
+  };
+
+  const onChange =
+    (key: keyof typeof form) =>
+    (
+      e:
+        | React.ChangeEvent<HTMLInputElement>
+        | React.ChangeEvent<HTMLTextAreaElement>
+        | React.ChangeEvent<HTMLSelectElement>,
+    ) => {
+      const value = e.target.value;
+      setForm((prev) => ({ ...prev, [key]: value }));
+    };
+
+  return (
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+        <div className="flex items-center justify-between border-b border-gray-100 bg-white p-6">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#447FC1]">Turnos</p>
+            <h3 className="mt-1 text-2xl font-extrabold text-[#727376]">Solicitar turno</h3>
+          </div>
+          <button
+            onClick={onClose}
+            className="rounded-full bg-gray-100 p-2 text-gray-600 transition-colors hover:bg-gray-200"
+            type="button"
+            aria-label="Cerrar"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        <div className="max-h-[75vh] overflow-y-auto p-6">
+          {status === "success" ? (
+            <div className="rounded-3xl border border-gray-100 bg-white p-8 text-center shadow-sm">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#9FCD5A]/15 text-[#9FCD5A]">
+                <Calendar size={28} />
+              </div>
+              <h4 className="text-2xl font-extrabold text-[#727376]">¡Solicitud enviada!</h4>
+              <p className="mt-2 text-gray-500">
+                Recibimos tu pedido. Un equipo se va a contactar para confirmar día y horario.
+              </p>
+              <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <button
+                  onClick={onClose}
+                  className="w-full rounded-full bg-[#9FCD5A] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50 sm:w-auto"
+                  type="button"
+                >
+                  Listo
+                </button>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={onSubmit} className="space-y-6">
+              {error && (
+                <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  {error}
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div>
+                  <label className="text-sm font-bold text-[#727376]">Nombre</label>
+                  <input
+                    value={form.nombre}
+                    onChange={onChange("nombre")}
+                    className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
+                    placeholder="Tu nombre"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-bold text-[#727376]">Apellido</label>
+                  <input
+                    value={form.apellido}
+                    onChange={onChange("apellido")}
+                    className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
+                    placeholder="Tu apellido"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-bold text-[#727376]">Teléfono</label>
+                  <input
+                    value={form.telefono}
+                    onChange={onChange("telefono")}
+                    className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
+                    placeholder="Ej: 264..."
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-bold text-[#727376]">Email (opcional)</label>
+                  <input
+                    value={form.email}
+                    onChange={onChange("email")}
+                    className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
+                    placeholder="tu@email.com"
+                    type="email"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-bold text-[#727376]">DNI (opcional)</label>
+                  <input
+                    value={form.dni}
+                    onChange={onChange("dni")}
+                    className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
+                    placeholder="Sin puntos"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-bold text-[#727376]">Especialidad</label>
+                  <input
+                    value={form.especialidad}
+                    onChange={onChange("especialidad")}
+                    className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
+                    placeholder="Ej: Cardiología"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-bold text-[#727376]">Fecha preferida</label>
+                  <input
+                    value={form.fechaPreferida}
+                    onChange={onChange("fechaPreferida")}
+                    className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
+                    type="date"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-bold text-[#727376]">Franja</label>
+                  <select
+                    value={form.franja}
+                    onChange={onChange("franja")}
+                    className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
+                  >
+                    <option value="indistinto">Indistinto</option>
+                    <option value="mañana">Mañana</option>
+                    <option value="tarde">Tarde</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm font-bold text-[#727376]">Comentario (opcional)</label>
+                <textarea
+                  value={form.comentario}
+                  onChange={onChange("comentario")}
+                  className="mt-2 min-h-[110px] w-full resize-y rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
+                  placeholder="Motivo de consulta, preferencia de profesional, etc."
+                />
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
+                <button
+                  onClick={onClose}
+                  className="rounded-full border-2 border-[#447FC1] bg-white px-8 py-4 text-lg font-bold text-[#447FC1] transition-all hover:-translate-y-1 hover:bg-[#447FC1] hover:text-white"
+                  type="button"
+                  disabled={status === "submitting"}
+                >
+                  Cancelar
+                </button>
+                <button
+                  className="rounded-full bg-[#9FCD5A] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50 disabled:cursor-not-allowed disabled:opacity-70"
+                  type="submit"
+                  disabled={status === "submitting"}
+                >
+                  {status === "submitting" ? "Enviando..." : "Enviar solicitud"}
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const COLORS = {
   green: "#9FCD5A",
   blue: "#447FC1",
@@ -259,13 +493,13 @@ function LocationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
               className="w-full"
               title="Ubicacion Sanatorio San Juan - Gral. Juan Lavalle 735"
             />
-          </div>
+        </div>
 
           <div className="space-y-3 border-t border-gray-100 pt-6">
-            <a
+          <a
               href="https://www.google.com/maps/search/?api=1&query=Gral.+Juan+Lavalle+735,+J5400+San+Juan,+Argentina"
-              target="_blank"
-              rel="noopener noreferrer"
+            target="_blank"
+            rel="noopener noreferrer"
               className="group flex w-full items-center justify-center gap-3 rounded-xl bg-[#447FC1] py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-[#3668a0] hover:shadow-[#447FC1]/30"
             >
               <Navigation className="transition-transform group-hover:rotate-12" size={20} />
@@ -287,10 +521,12 @@ function LocationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
 
 function Hero() {
   const [showLocationModal, setShowLocationModal] = useState(false);
+  const [showTurnosModal, setShowTurnosModal] = useState(false);
 
   return (
     <section className="relative flex h-screen w-full items-center justify-center overflow-hidden" id="inicio">
       <LocationModal isOpen={showLocationModal} onClose={() => setShowLocationModal(false)} />
+      <TurnosModal isOpen={showTurnosModal} onClose={() => setShowTurnosModal(false)} />
 
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 z-10 bg-gradient-to-tr from-[#447FC1]/90 via-[#447FC1]/70 to-[#9FCD5A]/50 mix-blend-multiply" />
@@ -324,6 +560,7 @@ function Hero() {
           <button
             className="group flex w-full items-center justify-center gap-3 rounded-full bg-[#9FCD5A] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50 md:w-auto"
             type="button"
+            onClick={() => setShowTurnosModal(true)}
           >
             <Calendar className="transition-transform group-hover:rotate-12" />
             Solicitar Turno
@@ -567,8 +804,8 @@ function Patients() {
             <p className="mt-2 text-gray-500">Coberturas y convenios con prepagas/obras sociales.</p>
             <a href="#contacto" className="mt-6 inline-flex items-center font-bold text-[#447FC1] hover:underline">
               Ver listado <ArrowRight size={16} className="ml-2" />
-            </a>
-          </div>
+          </a>
+        </div>
         </div>
       </div>
     </section>
