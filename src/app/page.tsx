@@ -252,7 +252,7 @@ function TurnosModal({
             />
             <div className="text-center">
               <p className="text-xs font-bold uppercase tracking-widest text-[#447FC1]">Turnos</p>
-              <h3 className="mt-1 text-2xl font-extrabold text-[#727376]">Solicitar turno</h3>
+              <h3 className="mt-1 text-lg font-extrabold text-[#727376]">Solicitar turno</h3>
             </div>
           </div>
         </div>
