@@ -6,6 +6,8 @@ import {
   ArrowRight,
   Bot,
   Calendar,
+  ChevronLeft,
+  ChevronRight,
   FileText,
   Heart,
   MapPin,
@@ -1401,6 +1403,92 @@ function GeminiAssistant() {
   );
 }
 
+function GalleryCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const images = [
+    "/galeria-01.jpg",
+    "/galeria-02.jpg",
+    "/galeria-03.jpg",
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  return (
+    <section className="relative w-full overflow-hidden bg-gray-900">
+      <div className="relative h-[500px] w-full md:h-[600px]">
+        {images.map((src, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-700 ${
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt={`Galería ${index + 1}`}
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          </div>
+        ))}
+
+        {/* Botones de navegación */}
+        <button
+          onClick={goToPrevious}
+          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/20 p-3 text-white backdrop-blur-md transition-all hover:bg-white/30 hover:scale-110"
+          type="button"
+          aria-label="Imagen anterior"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button
+          onClick={goToNext}
+          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/20 p-3 text-white backdrop-blur-md transition-all hover:bg-white/30 hover:scale-110"
+          type="button"
+          aria-label="Siguiente imagen"
+        >
+          <ChevronRight size={24} />
+        </button>
+
+        {/* Indicadores */}
+        <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`h-2 rounded-full transition-all ${
+                index === currentIndex
+                  ? "w-8 bg-[#9FCD5A]"
+                  : "w-2 bg-white/50 hover:bg-white/75"
+              }`}
+              type="button"
+              aria-label={`Ir a imagen ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#727376] py-16 text-white" id="contacto">
@@ -1481,6 +1569,7 @@ export default function Page() {
       <Institucional />
       <Services />
       <Technology />
+      <GalleryCarousel />
       <Footer />
       <GeminiAssistant />
     </div>
