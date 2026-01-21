@@ -13,6 +13,7 @@ import {
   MessageSquare,
   Mic,
   Navigation,
+  PlayCircle,
   Newspaper,
   Phone,
   Send,
@@ -856,20 +857,91 @@ function QuickLinks() {
 }
 
 function Institucional() {
+  const [showInstitucionalVideo, setShowInstitucionalVideo] = useState(false);
+
   return (
     <section id="institucional" className="bg-white py-24">
       <div className="container mx-auto px-6">
-        <div className="mx-auto max-w-3xl text-center">
+        {showInstitucionalVideo && (
+          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+            <div
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setShowInstitucionalVideo(false)}
+            />
+            <div className="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-black shadow-2xl">
+              <button
+                onClick={() => setShowInstitucionalVideo(false)}
+                className="absolute right-4 top-4 z-10 rounded-full bg-white/15 p-2 text-white backdrop-blur-md transition-colors hover:bg-white/25"
+                type="button"
+                aria-label="Cerrar"
+              >
+                <X size={20} />
+              </button>
+              <div className="relative aspect-video w-full">
+                <iframe
+                  className="absolute inset-0 h-full w-full"
+                  src="https://www.youtube.com/embed/ovv5dDsEoC4?autoplay=1&mute=1"
+                  title="Sanatorio San Juan - Centro quirúrgico y cuidados intensivos"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="mx-auto max-w-6xl">
           <span className="rounded-full bg-[#447FC1]/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#447FC1]">
             Institucional
           </span>
-          <h2 className="mt-4 text-4xl font-extrabold text-[#727376] md:text-5xl">
-            Conocé el <span className="text-[#9FCD5A]">SSJ</span>
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-gray-500">
-            Base lista para sumar historia, directivos, noticias y trabajá con nosotros, manteniendo el diseño y la
-            navegación del sitio.
-          </p>
+          <div className="mt-6 grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+            <div>
+              <h2 className="text-4xl font-extrabold text-[#727376] md:text-5xl">
+                Centro quirúrgico y <span className="text-[#9FCD5A]">cuidados intensivos</span>
+              </h2>
+              <p className="mt-4 text-sm font-bold uppercase tracking-widest text-[#447FC1]">Sobre el SSJ</p>
+              <p className="mt-4 text-lg leading-relaxed text-gray-600">
+                Somos una empresa de salud dedicada al cuidado de pacientes adultos con enfermedades agudas y crónicas,
+                que requieran atención médica especializada, tanto clínica como quirúrgica.
+              </p>
+              <p className="mt-4 text-lg leading-relaxed text-gray-600">
+                Sanatorio San Juan cuenta con guardia de urgencias 24 hs, atención ambulatoria, internación clínica,
+                internación quirúrgica y terapia intensiva.
+              </p>
+              <p className="mt-4 text-lg leading-relaxed text-gray-600">
+                Disponemos de un amplio equipo de médicos especialistas y profesionales altamente capacitados.
+              </p>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => setShowInstitucionalVideo(true)}
+                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#447FC1] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#3668a0] hover:shadow-[#447FC1]/30"
+                >
+                  Ver video
+                  <PlayCircle size={20} className="transition-transform group-hover:scale-110" />
+                </button>
+                <a
+                  href="#contacto"
+                  className="inline-flex items-center justify-center gap-3 rounded-full border-2 border-[#9FCD5A] bg-white px-8 py-4 text-lg font-bold text-[#727376] shadow-lg transition-all hover:-translate-y-1 hover:bg-[#9FCD5A]/10"
+                >
+                  Consultar
+                  <ArrowRight size={18} />
+                </a>
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-3xl border border-gray-100 bg-gray-50 shadow-2xl">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://ss-cnt-001c.esmsv.com/r/content/host2/9a3ded02845d9dd13edf0351290a936b//editor/Diseosinttulo69-(1911).webp"
+                alt="Sanatorio San Juan - Centro quirúrgico y cuidados intensivos"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
