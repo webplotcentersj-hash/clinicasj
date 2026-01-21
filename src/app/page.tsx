@@ -208,12 +208,13 @@ function TurnosModal({
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-bold text-[#727376]">DNI (opcional)</label>
+                  <label className="text-sm font-bold text-[#727376]">DNI</label>
                   <input
                     value={form.dni}
                     onChange={onChange("dni")}
                     className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
                     placeholder="Sin puntos"
+                    required
                   />
                 </div>
                 <div>
