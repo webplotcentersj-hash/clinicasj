@@ -747,7 +747,7 @@ function Header() {
           <img
             src="/ssj-logo-header.png"
             alt="Sanatorio San Juan Logo"
-            className={`object-contain transition-all duration-500 ${isScrolled ? "h-8 md:h-10" : "h-10 md:h-12"}`}
+            className={`object-contain transition-all duration-500 ${isScrolled ? "h-14 md:h-16" : "h-16 md:h-20"}`}
           />
         </div>
 
@@ -914,18 +914,6 @@ function Hero() {
           src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000"
           alt="Sanatorio San Juan Moderno"
         />
-      </div>
-
-      {/* Logo a la derecha y centrado verticalmente */}
-      <div className="absolute right-6 top-1/2 z-30 -translate-y-1/2 animate-in fade-in slide-in-from-right duration-1000 md:right-12">
-        <div className="rounded-2xl bg-white/95 p-6 shadow-2xl ring-2 ring-white/50 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-3xl">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/ssj-logo-header.png"
-            alt="Sanatorio San Juan"
-            className="h-28 w-auto transition-transform duration-300 hover:scale-105 md:h-40"
-          />
-        </div>
       </div>
 
       <div className="container relative z-20 mx-auto flex flex-col items-center px-6 pt-20 text-center md:items-start md:text-left">
