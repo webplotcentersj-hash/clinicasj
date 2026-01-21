@@ -234,27 +234,27 @@ function TurnosModal({
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
           <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-gray-100 bg-white p-6">
-          <div className="flex items-center gap-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/ssj-logo-header.png"
-              alt="Sanatorio San Juan Logo"
-              className="h-10 w-auto object-contain"
-            />
-            <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#447FC1]">Turnos</p>
-              <h3 className="mt-1 text-2xl font-extrabold text-[#727376]">Solicitar turno</h3>
-            </div>
-          </div>
+        <div className="relative border-b border-gray-100 bg-white p-6">
           <button
             onClick={onClose}
-            className="rounded-full bg-gray-100 p-2 text-gray-600 transition-colors hover:bg-gray-200"
+            className="absolute right-6 top-6 rounded-full bg-gray-100 p-2 text-gray-600 transition-colors hover:bg-gray-200"
             type="button"
             aria-label="Cerrar"
           >
             <X size={20} />
           </button>
+          <div className="flex flex-col items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/ssj-logo-header.png"
+              alt="Sanatorio San Juan Logo"
+              className="h-12 w-auto object-contain"
+            />
+            <div className="text-center">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#447FC1]">Turnos</p>
+              <h3 className="mt-1 text-2xl font-extrabold text-[#727376]">Solicitar turno</h3>
+            </div>
+          </div>
         </div>
 
         <div className="max-h-[75vh] overflow-y-auto p-6">
