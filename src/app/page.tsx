@@ -476,13 +476,13 @@ function Services() {
           <div className="mx-auto h-1.5 w-24 rounded-full bg-gradient-to-r from-[#447FC1] to-[#9FCD5A]" />
 
           <div className="mx-auto mt-8 flex w-full flex-col items-center justify-center gap-4 md:w-auto md:flex-row">
-            <a
-              href="#contacto"
+            <button
               className="group flex w-full items-center justify-center gap-3 rounded-full bg-[#9FCD5A] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50 md:w-auto"
+              type="button"
             >
+              <Calendar className="transition-transform group-hover:rotate-12" />
               Ver todas las especialidades
-              <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
-            </a>
+            </button>
             <a
               href="#contacto"
               className="flex w-full items-center justify-center gap-3 rounded-full border-2 border-[#447FC1] bg-white px-8 py-4 text-lg font-bold text-[#447FC1] shadow-lg transition-all hover:-translate-y-1 hover:bg-[#447FC1] hover:text-white md:w-auto"
