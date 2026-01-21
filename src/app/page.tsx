@@ -131,18 +131,12 @@ function Header() {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        <div
-          className={`flex items-center justify-center transition-all duration-500 ${
-            isScrolled
-              ? ""
-              : "rounded-full bg-white/95 px-3 py-1 shadow-lg backdrop-blur-sm transition-all hover:scale-105"
-          }`}
-        >
+        <div className="flex items-center justify-center transition-all duration-500">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/ssj-logo-header.png"
             alt="Sanatorio San Juan Logo"
-            className={`object-contain transition-all duration-500 ${isScrolled ? "h-6 md:h-8" : "h-7 md:h-10"}`}
+            className={`object-contain transition-all duration-500 ${isScrolled ? "h-8 md:h-10" : "h-10 md:h-12"}`}
           />
         </div>
 
@@ -481,13 +475,22 @@ function Services() {
           </h2>
           <div className="mx-auto h-1.5 w-24 rounded-full bg-gradient-to-r from-[#447FC1] to-[#9FCD5A]" />
 
-          <a
-            href="#contacto"
-            className="group mx-auto mt-8 inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#447FC1] bg-white px-7 py-3 text-sm font-extrabold uppercase tracking-wide text-[#447FC1] shadow-sm transition-all hover:-translate-y-0.5 hover:bg-[#447FC1] hover:text-white hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-[#447FC1]/25"
-          >
-            Ver todas las especialidades
-            <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-          </a>
+          <div className="mx-auto mt-8 flex w-full flex-col items-center justify-center gap-4 md:w-auto md:flex-row">
+            <a
+              href="#contacto"
+              className="group flex w-full items-center justify-center gap-3 rounded-full bg-[#9FCD5A] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50 md:w-auto"
+            >
+              Ver todas las especialidades
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
+            </a>
+            <a
+              href="#contacto"
+              className="flex w-full items-center justify-center gap-3 rounded-full border-2 border-[#447FC1] bg-white px-8 py-4 text-lg font-bold text-[#447FC1] shadow-lg transition-all hover:-translate-y-1 hover:bg-[#447FC1] hover:text-white md:w-auto"
+            >
+              Consultar por WhatsApp
+              <MessageSquare size={18} />
+            </a>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
