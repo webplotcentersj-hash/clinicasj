@@ -137,7 +137,7 @@ function TurnosModal({
         matricula: "MP 45678",
       },
     };
-    return (
+  return (
       doctors[especialidad] || {
         nombre: "Dr.",
         apellido: "Profesional",
@@ -789,7 +789,7 @@ function Header() {
             <Menu size={32} color={isScrolled ? COLORS.blue : "white"} />
           )}
         </button>
-      </div>
+        </div>
 
       {mobileMenuOpen && (
         <div className="absolute left-0 top-full flex w-full flex-col items-center space-y-6 border-t border-gray-100 bg-white/98 py-8 shadow-2xl backdrop-blur-xl md:hidden">
@@ -1016,7 +1016,7 @@ function QuickLinks() {
             </a>
           ))}
         </div>
-      </div>
+    </div>
     </section>
   );
 }
@@ -1234,12 +1234,13 @@ function Technology() {
             <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-r from-[#447FC1] to-[#9FCD5A] opacity-30 blur-lg transition duration-1000 group-hover:opacity-50" />
             <div className="relative overflow-hidden rounded-[2rem] shadow-2xl">
               <div className="relative aspect-video w-full">
-                <iframe
-                  src="https://www.youtube.com/embed/ovv5dDsEoC4?autoplay=1&mute=1&loop=1&playlist=ovv5dDsEoC4&controls=0&modestbranding=1&rel=0"
-                  className="absolute inset-0 h-full w-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title="Innovación que Salva Vidas - Sanatorio San Juan"
+                <video
+                  src="/innovation-video.mp4"
+                  className="h-full w-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#447FC1]/80 to-transparent opacity-60" />
                 <div className="absolute bottom-8 left-8 text-white">
