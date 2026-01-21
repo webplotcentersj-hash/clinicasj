@@ -140,7 +140,7 @@ function Header() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/ssj-logo.webp"
+            src="/ssj-logo-header.png"
             alt="Sanatorio San Juan Logo"
             className={`object-contain transition-all duration-500 ${isScrolled ? "h-6 md:h-8" : "h-7 md:h-10"}`}
           />
