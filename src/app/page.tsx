@@ -344,7 +344,7 @@ export default function Home() {
           </div>
           <div className="mt-8 border-t border-[#727376]/20 pt-8 text-center">
             <p className="text-sm text-[#727376]">
-              © {new Date().getFullYear()} Sanatorio San Juan. Todos los derechos reservados.
+              © {new Date().getFullYear()} Todos los derechos reservados.
             </p>
           </div>
         </div>
