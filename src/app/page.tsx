@@ -1432,7 +1432,7 @@ function GalleryCarousel() {
 
   return (
     <section className="relative w-full overflow-hidden bg-gray-900">
-      <div className="relative h-[500px] w-full md:h-[600px]">
+      <div className="relative h-[600px] w-full md:h-[700px] lg:h-[800px]">
         {images.map((src, index) => (
           <div
             key={index}
@@ -1444,7 +1444,7 @@ function GalleryCarousel() {
             <img
               src={src}
               alt={`Galería ${index + 1}`}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
           </div>
