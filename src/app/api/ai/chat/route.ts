@@ -110,25 +110,41 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const genAI = new GoogleGenAI(apiKey);
-    const model = genAI.getGenerativeModel({ 
+    const ai = new GoogleGenAI({ apiKey });
+
+    // Construir el contenido con historial de conversación
+    // Si hay historial, construir array de mensajes; si no, usar string simple
+    let contents: string | Array<{ role: string; parts: Array<{ text: string }> }>;
+    
+    if (conversationHistory.length > 0) {
+      // Construir array de mensajes con historial
+      const historyArray: Array<{ role: string; parts: Array<{ text: string }> }> = [];
+      
+      conversationHistory.forEach((msg: { role: string; content: string }) => {
+        historyArray.push({
+          role: msg.role === "user" ? "user" : "model",
+          parts: [{ text: msg.content }],
+        });
+      });
+      
+      // Agregar mensaje actual
+      historyArray.push({
+        role: "user",
+        parts: [{ text: message }],
+      });
+      
+      contents = historyArray;
+    } else {
+      // Primera interacción: incluir contexto del sistema en el mensaje
+      contents = `${SYSTEM_CONTEXT}\n\nUsuario: ${message}`;
+    }
+
+    const response = await ai.models.generateContent({
       model: "gemini-1.5-flash",
-      systemInstruction: SYSTEM_CONTEXT,
+      contents: contents,
     });
 
-    // Construir el historial de conversación
-    const history = conversationHistory.map((msg: { role: string; content: string }) => ({
-      role: msg.role === "user" ? "user" : "model",
-      parts: [{ text: msg.content }],
-    }));
-
-    const chat = model.startChat({
-      history: history,
-    });
-
-    const result = await chat.sendMessage(message);
-    const response = await result.response;
-    const text = response.text();
+    const text = response.text;
 
     return NextResponse.json({ 
       message: text,
