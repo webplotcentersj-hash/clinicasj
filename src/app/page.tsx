@@ -12,9 +12,6 @@ export default function Home() {
               alt="Sanatorio San Juan"
               className="h-10 w-auto"
             />
-            <span className="text-lg font-semibold text-[#1a1a1a]">
-              Sanatorio San Juan
-            </span>
           </a>
           <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
             <a className="text-[#727376] transition-colors hover:text-[#447FC1]" href="#pacientes">
@@ -313,9 +310,6 @@ export default function Home() {
                   alt="Sanatorio San Juan"
                   className="h-8 w-auto"
                 />
-                <span className="text-lg font-semibold text-[#1a1a1a]">
-                  Sanatorio San Juan
-                </span>
               </div>
               <p className="text-sm text-[#727376]">
                 Atención integral con tecnología y calidad humana.
