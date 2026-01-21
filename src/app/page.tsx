@@ -32,6 +32,7 @@ function TurnosModal({
 }) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [turnosDisponibles, setTurnosDisponibles] = useState<Array<{ hora: string; disponible: boolean }>>([]);
 
   const [form, setForm] = useState({
     nombre: "",
@@ -44,6 +45,33 @@ function TurnosModal({
     franja: "indistinto" as "mañana" | "tarde" | "indistinto",
     comentario: "",
   });
+
+  // Generar turnos disponibles de ejemplo cuando se selecciona especialidad y fecha
+  useEffect(() => {
+    if (form.especialidad && form.fechaPreferida) {
+      const turnos = [
+        { hora: "08:00", disponible: true },
+        { hora: "08:30", disponible: true },
+        { hora: "09:00", disponible: false },
+        { hora: "09:30", disponible: true },
+        { hora: "10:00", disponible: true },
+        { hora: "10:30", disponible: false },
+        { hora: "11:00", disponible: true },
+        { hora: "11:30", disponible: true },
+        { hora: "14:00", disponible: true },
+        { hora: "14:30", disponible: false },
+        { hora: "15:00", disponible: true },
+        { hora: "15:30", disponible: true },
+        { hora: "16:00", disponible: true },
+        { hora: "16:30", disponible: false },
+        { hora: "17:00", disponible: true },
+        { hora: "17:30", disponible: true },
+      ];
+      setTurnosDisponibles(turnos);
+    } else {
+      setTurnosDisponibles([]);
+    }
+  }, [form.especialidad, form.fechaPreferida]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -190,13 +218,19 @@ function TurnosModal({
                 </div>
                 <div>
                   <label className="text-sm font-bold text-[#727376]">Especialidad</label>
-                  <input
+                  <select
                     value={form.especialidad}
                     onChange={onChange("especialidad")}
                     className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#447FC1] focus:ring-4 focus:ring-[#447FC1]/15"
-                    placeholder="Ej: Cardiología"
                     required
-                  />
+                  >
+                    <option value="">Seleccionar especialidad</option>
+                    {ESPECIALIDADES.map((esp) => (
+                      <option key={esp} value={esp}>
+                        {esp}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label className="text-sm font-bold text-[#727376]">Fecha preferida</label>
@@ -221,6 +255,35 @@ function TurnosModal({
                   </select>
                 </div>
               </div>
+
+              {/* Turnos disponibles */}
+              {turnosDisponibles.length > 0 && (
+                <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+                  <p className="mb-4 text-sm font-bold text-[#727376]">Turnos disponibles para {form.especialidad}</p>
+                  <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8">
+                    {turnosDisponibles.map((turno, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          // Aquí podrías seleccionar el turno si quisieras
+                        }}
+                        disabled={!turno.disponible}
+                        className={`rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
+                          turno.disponible
+                            ? "bg-white text-[#447FC1] shadow-sm hover:bg-[#447FC1] hover:text-white hover:shadow-md"
+                            : "cursor-not-allowed bg-gray-200 text-gray-400 line-through"
+                        }`}
+                      >
+                        {turno.hora}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="mt-4 text-xs text-gray-500">
+                    Seleccioná un horario disponible o continuá con tu fecha preferida
+                  </p>
+                </div>
+              )}
 
               <div>
                 <label className="text-sm font-bold text-[#727376]">Comentario (opcional)</label>
@@ -263,6 +326,28 @@ const COLORS = {
   gray: "#727376",
   white: "#ffffff",
 } as const;
+
+const ESPECIALIDADES = [
+  "Ecografía General",
+  "Neurocirugía",
+  "Gastroenterología",
+  "Urología",
+  "Nefrología",
+  "Diabetología",
+  "Nutrición",
+  "Cardiología",
+  "Eco Doppler Color",
+  "Fisio Kinesiología",
+  "Cirugía General",
+  "Obesidad",
+  "Educación Física Adaptada a la Salud",
+  "Pediatría",
+  "Clínica Médica",
+  "Medicina del Trabajo",
+  "Traumatología",
+  "Ginecología",
+  "Psicología",
+] as const;
 
 const KNOWLEDGE_BASE = [
   {
