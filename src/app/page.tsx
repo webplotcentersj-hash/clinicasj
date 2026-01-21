@@ -1,136 +1,163 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="sticky top-0 z-50 border-b border-[#727376]/20 bg-white/95 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a href="#" className="flex items-center gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/ssj-logo.webp"
               alt="Sanatorio San Juan"
-              className="h-9 w-auto"
+              className="h-10 w-auto"
             />
-            <span className="text-sm font-semibold tracking-tight">
+            <span className="text-lg font-semibold text-[#1a1a1a]">
               Sanatorio San Juan
             </span>
           </a>
-          <nav className="hidden items-center gap-6 text-sm md:flex">
-            <a className="text-muted-foreground hover:text-foreground" href="#pacientes">
+          <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
+            <a className="text-[#727376] transition-colors hover:text-[#447FC1]" href="#pacientes">
               Pacientes
             </a>
-            <a className="text-muted-foreground hover:text-foreground" href="#ubicaciones">
+            <a className="text-[#727376] transition-colors hover:text-[#447FC1]" href="#ubicaciones">
               Ubicaciones
             </a>
-            <a className="text-muted-foreground hover:text-foreground" href="#contacto">
+            <a className="text-[#727376] transition-colors hover:text-[#447FC1]" href="#contacto">
               Contacto
             </a>
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <a
               href="#turnos"
-              className="inline-flex h-10 items-center justify-center rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-95"
+              className="inline-flex h-10 items-center justify-center rounded-full bg-[#9FCD5A] px-6 text-sm font-semibold text-[#1a1a1a] shadow-md transition-all hover:bg-[#8fc04a] hover:shadow-lg"
             >
               Turnos online
-            </a>
-            <a
-              href="#contacto"
-              className="hidden h-10 items-center justify-center rounded-full border border-border bg-card px-4 text-sm font-semibold text-card-foreground hover:bg-muted md:inline-flex"
-            >
-              Consultar
             </a>
           </div>
         </div>
       </header>
 
       <main>
-        <section className="relative overflow-hidden">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-white via-[#f8f9fa] to-[#e8f4fd]">
           <div className="absolute inset-0 -z-10">
-            <div className="absolute -top-24 left-1/2 h-72 w-[44rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
-            <div className="absolute -bottom-24 left-1/3 h-72 w-[44rem] -translate-x-1/2 rounded-full bg-accent/15 blur-3xl" />
+            <div className="absolute -top-40 right-0 h-96 w-96 rounded-full bg-[#9FCD5A]/10 blur-3xl" />
+            <div className="absolute -bottom-40 left-0 h-96 w-96 rounded-full bg-[#447FC1]/10 blur-3xl" />
           </div>
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-14 md:grid-cols-2 md:py-20">
-            <div className="flex flex-col justify-center">
-              <p className="mb-3 inline-flex w-fit items-center rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-20 md:grid-cols-2 md:py-28 lg:items-center">
+            <div className="flex flex-col">
+              <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#9FCD5A]/10 px-4 py-1.5 text-xs font-semibold text-[#1a1a1a]">
+                <span className="h-2 w-2 rounded-full bg-[#9FCD5A]"></span>
                 Confort • Tecnología • Servicios 24hs
-              </p>
-              <h1 className="text-balance text-4xl font-semibold tracking-tight md:text-5xl">
-                Atención integral con foco en tecnología y calidad humana.
+              </div>
+              <h1 className="text-balance text-5xl font-bold leading-tight tracking-tight text-[#1a1a1a] md:text-6xl lg:text-7xl">
+                Atención integral con{" "}
+                <span className="text-[#447FC1]">tecnología</span> y{" "}
+                <span className="text-[#9FCD5A]">calidad humana</span>
               </h1>
-              <p className="mt-4 text-pretty text-base leading-7 text-muted-foreground">
-                Especialidades, internación y servicios 24hs. Guardía pediátrica y
-                consultorios de demanda espontánea, con cobertura de obras
-                sociales.
+              <p className="mt-6 text-lg leading-7 text-[#727376] md:text-xl">
+                Especialidades, internación y servicios 24hs. Guardia pediátrica y
+                consultorios de demanda espontánea, con cobertura de obras sociales.
               </p>
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#turnos"
-                  className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-95"
+                  className="inline-flex h-12 items-center justify-center rounded-full bg-[#9FCD5A] px-8 text-base font-semibold text-[#1a1a1a] shadow-lg transition-all hover:bg-[#8fc04a] hover:shadow-xl"
                 >
                   Sacar turno
                 </a>
                 <a
                   href="#pediatria"
-                  className="inline-flex h-11 items-center justify-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-card-foreground hover:bg-muted"
+                  className="inline-flex h-12 items-center justify-center rounded-full border-2 border-[#447FC1] bg-white px-8 text-base font-semibold text-[#447FC1] transition-all hover:bg-[#447FC1] hover:text-white"
                 >
                   Guardia pediátrica
                 </a>
               </div>
 
-              <div className="mt-8 grid grid-cols-3 gap-3 text-sm">
-                <div className="rounded-2xl border border-border bg-card p-4">
-                  <p className="font-semibold">Confort</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Comodidades para una estadía placentera.
+              {/* Stats Cards */}
+              <div className="mt-12 grid grid-cols-3 gap-4">
+                <div className="rounded-2xl border border-[#727376]/20 bg-white p-5 shadow-sm">
+                  <div className="mb-2 h-10 w-10 rounded-lg bg-[#9FCD5A]/10 flex items-center justify-center">
+                    <span className="text-xl">🛏️</span>
+                  </div>
+                  <p className="text-sm font-semibold text-[#1a1a1a]">Confort</p>
+                  <p className="mt-1 text-xs text-[#727376]">
+                    Estadía placentera
                   </p>
                 </div>
-                <div className="rounded-2xl border border-border bg-card p-4">
-                  <p className="font-semibold">Tecnología</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Diagnóstico rápido e innovación.
+                <div className="rounded-2xl border border-[#727376]/20 bg-white p-5 shadow-sm">
+                  <div className="mb-2 h-10 w-10 rounded-lg bg-[#447FC1]/10 flex items-center justify-center">
+                    <span className="text-xl">💻</span>
+                  </div>
+                  <p className="text-sm font-semibold text-[#1a1a1a]">Tecnología</p>
+                  <p className="mt-1 text-xs text-[#727376]">
+                    Diagnóstico rápido
                   </p>
                 </div>
-                <div className="rounded-2xl border border-border bg-card p-4">
-                  <p className="font-semibold">Servicios 24hs</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Siempre disponibles para vos.
+                <div className="rounded-2xl border border-[#727376]/20 bg-white p-5 shadow-sm">
+                  <div className="mb-2 h-10 w-10 rounded-lg bg-[#9FCD5A]/10 flex items-center justify-center">
+                    <span className="text-xl">🕐</span>
+                  </div>
+                  <p className="text-sm font-semibold text-[#1a1a1a]">24hs</p>
+                  <p className="mt-1 text-xs text-[#727376]">
+                    Siempre disponibles
                   </p>
                 </div>
               </div>
             </div>
 
+            {/* Hero Card */}
             <div className="flex items-center justify-center">
-              <div className="w-full rounded-3xl border border-border bg-card p-6 shadow-sm">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold">Accesos rápidos</p>
-                  <p className="text-xs text-muted-foreground">AI + automatización</p>
+              <div className="w-full rounded-3xl border border-[#727376]/20 bg-gradient-to-br from-white to-[#f8f9fa] p-8 shadow-xl">
+                <div className="mb-6 flex items-center justify-between">
+                  <p className="text-lg font-bold text-[#1a1a1a]">Accesos rápidos</p>
+                  <span className="rounded-full bg-[#447FC1]/10 px-3 py-1 text-xs font-semibold text-[#447FC1]">
+                    AI + Automatización
+                  </span>
                 </div>
-                <div className="mt-5 grid gap-3">
+                <div className="space-y-4">
                   <a
                     href="#turnos"
-                    className="rounded-2xl border border-border bg-muted p-4 hover:bg-muted/80"
+                    className="group block rounded-2xl border border-[#727376]/20 bg-white p-5 shadow-sm transition-all hover:border-[#9FCD5A] hover:shadow-md"
                   >
-                    <p className="font-semibold">Turnos online</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      Solicitar turno y derivación a especialidad.
-                    </p>
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="font-semibold text-[#1a1a1a]">Turnos online</p>
+                        <p className="mt-1 text-sm text-[#727376]">
+                          Solicitar turno y derivación
+                        </p>
+                      </div>
+                      <span className="text-[#9FCD5A] group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
                   </a>
                   <a
                     href="#contacto"
-                    className="rounded-2xl border border-border bg-muted p-4 hover:bg-muted/80"
+                    className="group block rounded-2xl border border-[#727376]/20 bg-white p-5 shadow-sm transition-all hover:border-[#447FC1] hover:shadow-md"
                   >
-                    <p className="font-semibold">Contactar</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      Consulta rápida (WhatsApp/Email/CRM listo para integrar).
-                    </p>
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="font-semibold text-[#1a1a1a]">Contactar</p>
+                        <p className="mt-1 text-sm text-[#727376]">
+                          WhatsApp/Email/CRM
+                        </p>
+                      </div>
+                      <span className="text-[#447FC1] group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
                   </a>
                   <a
                     href="#pediatria"
-                    className="rounded-2xl border border-border bg-muted p-4 hover:bg-muted/80"
+                    className="group block rounded-2xl border border-[#727376]/20 bg-white p-5 shadow-sm transition-all hover:border-[#9FCD5A] hover:shadow-md"
                   >
-                    <p className="font-semibold">Pediatría sin turno</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      Demanda espontánea, rápida atención.
-                    </p>
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="font-semibold text-[#1a1a1a]">Pediatría sin turno</p>
+                        <p className="mt-1 text-sm text-[#727376]">
+                          Demanda espontánea
+                        </p>
+                      </div>
+                      <span className="text-[#9FCD5A] group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
                   </a>
                 </div>
               </div>
@@ -138,54 +165,80 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="pacientes" className="mx-auto max-w-6xl px-6 py-16">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-semibold tracking-tight">Pacientes</h2>
-            <p className="text-muted-foreground">
-              Secciones principales del sitio (estructura lista para crecer).
+        {/* Pacientes Section */}
+        <section id="pacientes" className="mx-auto max-w-7xl px-6 py-20">
+          <div className="mb-12 text-center">
+            <h2 className="text-4xl font-bold text-[#1a1a1a]">Pacientes</h2>
+            <p className="mt-3 text-lg text-[#727376]">
+              Servicios y especialidades para tu atención integral
             </p>
           </div>
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {[
               {
                 title: "Especialidades",
-                desc: "Listado y derivación a turnos.",
+                desc: "Listado completo y derivación a turnos.",
+                icon: "🏥",
+                color: "bg-[#447FC1]/10",
               },
               {
                 title: "Internación",
-                desc: "Servicios y comodidades.",
+                desc: "Servicios y comodidades para tu estadía.",
+                icon: "🛏️",
+                color: "bg-[#9FCD5A]/10",
               },
               {
                 title: "Equipo profesional",
-                desc: "Directorio médico.",
+                desc: "Directorio médico especializado.",
+                icon: "👨‍⚕️",
+                color: "bg-[#447FC1]/10",
               },
             ].map((card) => (
               <div
                 key={card.title}
-                className="rounded-3xl border border-border bg-card p-6 shadow-sm"
+                className="group rounded-3xl border border-[#727376]/20 bg-white p-8 shadow-sm transition-all hover:shadow-lg"
               >
-                <p className="font-semibold">{card.title}</p>
-                <p className="mt-2 text-sm text-muted-foreground">{card.desc}</p>
+                <div className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${card.color}`}>
+                  <span className="text-2xl">{card.icon}</span>
+                </div>
+                <h3 className="text-xl font-bold text-[#1a1a1a]">{card.title}</h3>
+                <p className="mt-2 text-[#727376]">{card.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="pediatria" className="border-y border-border bg-muted/40">
-          <div className="mx-auto max-w-6xl px-6 py-16">
-            <div className="grid gap-10 md:grid-cols-2 md:items-center">
+        {/* Guardia Pediátrica Section */}
+        <section id="pediatria" className="bg-gradient-to-br from-[#447FC1]/5 via-white to-[#9FCD5A]/5">
+          <div className="mx-auto max-w-7xl px-6 py-20">
+            <div className="grid gap-12 md:grid-cols-2 md:items-center">
               <div>
-                <h2 className="text-2xl font-semibold tracking-tight">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#9FCD5A]/10 px-4 py-1.5 text-xs font-semibold text-[#1a1a1a]">
+                  <span className="h-2 w-2 rounded-full bg-[#9FCD5A]"></span>
+                  Sin turno previo
+                </div>
+                <h2 className="text-4xl font-bold text-[#1a1a1a]">
                   ¿Buscás atención pediátrica?
                 </h2>
-                <p className="mt-3 text-muted-foreground">
+                <p className="mt-4 text-lg leading-7 text-[#727376]">
                   Consultorios de demanda espontánea, sin turno previo. Rápida
                   atención, cobertura de obras sociales y sin copago.
                 </p>
+                <a
+                  href="#contacto"
+                  className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-[#447FC1] px-8 text-base font-semibold text-white shadow-lg transition-all hover:bg-[#3a6ba8] hover:shadow-xl"
+                >
+                  Consultar horarios
+                </a>
               </div>
-              <div className="rounded-3xl border border-border bg-card p-6">
-                <p className="text-sm font-semibold">Tip rápido</p>
-                <p className="mt-2 text-sm text-muted-foreground">
+              <div className="rounded-3xl border border-[#727376]/20 bg-white p-8 shadow-xl">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-[#447FC1]/10 flex items-center justify-center">
+                    <span className="text-lg">💡</span>
+                  </div>
+                  <p className="font-semibold text-[#1a1a1a]">Asistente AI</p>
+                </div>
+                <p className="text-[#727376]">
                   Podemos sumar un asistente AI para orientar al paciente y
                   derivarlo automáticamente a turnos/guardia según síntomas y
                   especialidad.
@@ -195,60 +248,111 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="ubicaciones" className="mx-auto max-w-6xl px-6 py-16">
-          <h2 className="text-2xl font-semibold tracking-tight">Ubicaciones</h2>
-          <p className="mt-2 text-muted-foreground">
-            Sanatorio e internación • Consultorios externos • Administración
-          </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+        {/* Ubicaciones Section */}
+        <section id="ubicaciones" className="mx-auto max-w-7xl px-6 py-20">
+          <div className="mb-12 text-center">
+            <h2 className="text-4xl font-bold text-[#1a1a1a]">Ubicaciones</h2>
+            <p className="mt-3 text-lg text-[#727376]">
+              Sanatorio e internación • Consultorios externos • Administración
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
             {[
-              "Sanatorio e Internación",
-              "Consultorios Externos",
-              "Administración",
-            ].map((title) => (
+              { title: "Sanatorio e Internación", icon: "🏥" },
+              { title: "Consultorios Externos", icon: "🏢" },
+              { title: "Administración", icon: "📋" },
+            ].map((item) => (
               <div
-                key={title}
-                className="rounded-3xl border border-border bg-card p-6 shadow-sm"
+                key={item.title}
+                className="group rounded-3xl border border-[#727376]/20 bg-white p-8 shadow-sm transition-all hover:shadow-lg"
               >
-                <p className="font-semibold">{title}</p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  (Datos y mapa se conectan en la siguiente iteración.)
+                <div className="mb-4 text-3xl">{item.icon}</div>
+                <h3 className="text-xl font-bold text-[#1a1a1a]">{item.title}</h3>
+                <p className="mt-2 text-sm text-[#727376]">
+                  Lavalle sur 735, San Juan
                 </p>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="turnos" className="border-t border-border bg-card">
-          <div className="mx-auto max-w-6xl px-6 py-16">
-            <div className="flex flex-col gap-2">
-              <h2 className="text-2xl font-semibold tracking-tight">Turnos online</h2>
-              <p className="text-muted-foreground">
-                Dejo este bloque listo para integrar el sistema real de turnos.
+        {/* Turnos Section */}
+        <section id="turnos" className="bg-gradient-to-br from-[#9FCD5A]/5 to-white">
+          <div className="mx-auto max-w-7xl px-6 py-20">
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="text-4xl font-bold text-[#1a1a1a]">Turnos online</h2>
+              <p className="mt-4 text-lg text-[#727376]">
+                Solicita tu turno de forma rápida y sencilla
               </p>
-            </div>
-            <div className="mt-8 rounded-3xl border border-border bg-muted p-6">
-              <p className="font-semibold">Próximo paso</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Conectar el botón a la plataforma de turnos actual y sumar un
-                flujo automatizado (confirmación por WhatsApp/Email).
-              </p>
+              <div className="mt-8 rounded-3xl border border-[#727376]/20 bg-white p-8 shadow-lg">
+                <p className="font-semibold text-[#1a1a1a]">Sistema de turnos</p>
+                <p className="mt-2 text-[#727376]">
+                  Conectar el botón a la plataforma de turnos actual y sumar un
+                  flujo automatizado (confirmación por WhatsApp/Email).
+                </p>
+                <a
+                  href="#contacto"
+                  className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-[#9FCD5A] px-8 text-base font-semibold text-[#1a1a1a] shadow-lg transition-all hover:bg-[#8fc04a] hover:shadow-xl"
+                >
+                  Solicitar turno
+                </a>
+              </div>
             </div>
           </div>
         </section>
       </main>
 
-      <footer id="contacto" className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-10">
-          <div className="flex flex-col gap-2">
-            <p className="text-sm font-semibold">Contacto</p>
-            <p className="text-sm text-muted-foreground">
-              Lavalle sur 735, San Juan • Turnos online • Redes/WhatsApp (a conectar)
+      {/* Footer */}
+      <footer id="contacto" className="border-t border-[#727376]/20 bg-[#f8f9fa]">
+        <div className="mx-auto max-w-7xl px-6 py-12">
+          <div className="grid gap-8 md:grid-cols-3">
+            <div>
+              <div className="mb-4 flex items-center gap-3">
+                <img
+                  src="/ssj-logo.webp"
+                  alt="Sanatorio San Juan"
+                  className="h-8 w-auto"
+                />
+                <span className="text-lg font-semibold text-[#1a1a1a]">
+                  Sanatorio San Juan
+                </span>
+              </div>
+              <p className="text-sm text-[#727376]">
+                Atención integral con tecnología y calidad humana.
+              </p>
+            </div>
+            <div>
+              <p className="mb-4 font-semibold text-[#1a1a1a]">Contacto</p>
+              <p className="text-sm text-[#727376]">
+                Lavalle sur 735, San Juan
+              </p>
+              <p className="mt-2 text-sm text-[#727376]">
+                +54 92644200930
+              </p>
+              <p className="mt-2 text-sm text-[#727376]">
+                redes.sanatoriosanjuan@gmail.com
+              </p>
+            </div>
+            <div>
+              <p className="mb-4 font-semibold text-[#1a1a1a]">Enlaces</p>
+              <div className="space-y-2">
+                <a href="#turnos" className="block text-sm text-[#727376] hover:text-[#447FC1] transition-colors">
+                  Turnos online
+                </a>
+                <a href="#pediatria" className="block text-sm text-[#727376] hover:text-[#447FC1] transition-colors">
+                  Guardia pediátrica
+                </a>
+                <a href="#ubicaciones" className="block text-sm text-[#727376] hover:text-[#447FC1] transition-colors">
+                  Ubicaciones
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 border-t border-[#727376]/20 pt-8 text-center">
+            <p className="text-sm text-[#727376]">
+              © {new Date().getFullYear()} Sanatorio San Juan. Todos los derechos reservados.
             </p>
           </div>
-          <p className="mt-6 text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Sanatorio San Juan
-          </p>
         </div>
       </footer>
     </div>
