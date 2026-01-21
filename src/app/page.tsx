@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
@@ -106,56 +104,54 @@ export default function Home() {
 
             {/* Hero Card */}
             <div className="flex items-center justify-center">
-              <div className="w-full rounded-3xl border border-[#727376]/20 bg-gradient-to-br from-white to-[#f8f9fa] p-8 shadow-xl">
-                <div className="mb-6 flex items-center justify-between">
-                  <p className="text-lg font-bold text-[#1a1a1a]">Accesos rápidos</p>
-                  <span className="rounded-full bg-[#447FC1]/10 px-3 py-1 text-xs font-semibold text-[#447FC1]">
-                    AI + Automatización
-                  </span>
+              <div className="w-full">
+                <div className="relative overflow-hidden rounded-3xl border border-[#727376]/20 bg-black shadow-2xl">
+                  <div className="relative aspect-[16/11] min-h-[360px] w-full">
+                    <iframe
+                      className="absolute inset-0 h-full w-full scale-[1.06]"
+                      src="https://www.youtube-nocookie.com/embed/8_SWoS6NyOc?autoplay=1&mute=1&loop=1&playlist=8_SWoS6NyOc&controls=0&modestbranding=1&rel=0&playsinline=1"
+                      title="Sanatorio San Juan - video portada"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
+                  </div>
+
+                  <div className="absolute inset-x-0 bottom-0 p-6">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <p className="text-sm font-semibold text-white">
+                          Portada (video)
+                        </p>
+                        <p className="mt-1 text-xs text-white/80">
+                          Reproduce en loop sin sonido para acompañar el hero.
+                        </p>
+                      </div>
+                      <a
+                        href="#turnos"
+                        className="inline-flex h-10 items-center justify-center rounded-full bg-[#9FCD5A] px-5 text-sm font-semibold text-[#1a1a1a] shadow-lg transition-all hover:bg-[#8fc04a]"
+                      >
+                        Turnos online
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  <a
-                    href="#turnos"
-                    className="group block rounded-2xl border border-[#727376]/20 bg-white p-5 shadow-sm transition-all hover:border-[#9FCD5A] hover:shadow-md"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <p className="font-semibold text-[#1a1a1a]">Turnos online</p>
-                        <p className="mt-1 text-sm text-[#727376]">
-                          Solicitar turno y derivación
-                        </p>
-                      </div>
-                      <span className="text-[#9FCD5A] group-hover:translate-x-1 transition-transform">→</span>
-                    </div>
-                  </a>
-                  <a
-                    href="#contacto"
-                    className="group block rounded-2xl border border-[#727376]/20 bg-white p-5 shadow-sm transition-all hover:border-[#447FC1] hover:shadow-md"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <p className="font-semibold text-[#1a1a1a]">Contactar</p>
-                        <p className="mt-1 text-sm text-[#727376]">
-                          WhatsApp/Email/CRM
-                        </p>
-                      </div>
-                      <span className="text-[#447FC1] group-hover:translate-x-1 transition-transform">→</span>
-                    </div>
-                  </a>
-                  <a
-                    href="#pediatria"
-                    className="group block rounded-2xl border border-[#727376]/20 bg-white p-5 shadow-sm transition-all hover:border-[#9FCD5A] hover:shadow-md"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <p className="font-semibold text-[#1a1a1a]">Pediatría sin turno</p>
-                        <p className="mt-1 text-sm text-[#727376]">
-                          Demanda espontánea
-                        </p>
-                      </div>
-                      <span className="text-[#9FCD5A] group-hover:translate-x-1 transition-transform">→</span>
-                    </div>
-                  </a>
+
+                <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  {[
+                    { title: "Turnos", href: "#turnos", color: "text-[#9FCD5A]" },
+                    { title: "Contacto", href: "#contacto", color: "text-[#447FC1]" },
+                    { title: "Pediatría", href: "#pediatria", color: "text-[#9FCD5A]" },
+                  ].map((item) => (
+                    <a
+                      key={item.title}
+                      href={item.href}
+                      className="rounded-2xl border border-[#727376]/20 bg-white p-4 text-sm font-semibold text-[#1a1a1a] shadow-sm transition-all hover:shadow-md"
+                    >
+                      <span className={item.color}>●</span> {item.title}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
