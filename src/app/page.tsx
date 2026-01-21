@@ -1173,48 +1173,6 @@ function Services() {
   );
 }
 
-function Patients() {
-  return (
-    <section id="pacientes" className="bg-white py-24">
-      <div className="container mx-auto px-6">
-        <div className="mb-14 text-center">
-          <span className="rounded-full bg-[#9FCD5A]/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#727376]">
-            Pacientes
-          </span>
-          <h2 className="mt-4 text-4xl font-extrabold text-[#727376] md:text-5xl">
-            Información <span className="text-[#447FC1]">útil</span> y accesos rápidos
-          </h2>
-          <div className="mx-auto mt-6 h-1.5 w-24 rounded-full bg-gradient-to-r from-[#447FC1] to-[#9FCD5A]" />
-        </div>
-
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-xl">
-            <h3 className="text-xl font-bold text-[#727376]">Turnos</h3>
-            <p className="mt-2 text-gray-500">Solicitá turnos y recibí confirmación (WhatsApp/Email a integrar).</p>
-            <a href="#contacto" className="mt-6 inline-flex items-center font-bold text-[#447FC1] hover:underline">
-              Ver opciones <ArrowRight size={16} className="ml-2" />
-            </a>
-          </div>
-          <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-xl">
-            <h3 className="text-xl font-bold text-[#727376]">Horarios</h3>
-            <p className="mt-2 text-gray-500">Guardia 24hs, laboratorio y consultorios externos.</p>
-            <a href="#contacto" className="mt-6 inline-flex items-center font-bold text-[#9FCD5A] hover:underline">
-              Consultar <ArrowRight size={16} className="ml-2" />
-            </a>
-          </div>
-          <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-xl">
-            <h3 className="text-xl font-bold text-[#727376]">Obras Sociales</h3>
-            <p className="mt-2 text-gray-500">Coberturas y convenios con prepagas/obras sociales.</p>
-            <a href="#contacto" className="mt-6 inline-flex items-center font-bold text-[#447FC1] hover:underline">
-              Ver listado <ArrowRight size={16} className="ml-2" />
-          </a>
-        </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Technology() {
   return (
     <section className="overflow-hidden bg-white py-24">
@@ -1522,7 +1480,6 @@ export default function Page() {
       <QuickLinks />
       <Institucional />
       <Services />
-      <Patients />
       <Technology />
       <Footer />
       <GeminiAssistant />
