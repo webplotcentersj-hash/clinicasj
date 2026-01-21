@@ -57,7 +57,7 @@ const KNOWLEDGE_BASE = [
   {
     keywords: ["ubicacion", "donde", "llegar", "direccion", "calle", "mapa"],
     response:
-      "Nuestra Sede Central está en **Av. Libertador Gral. San Martín 1234**, San Juan. Contamos con estacionamiento exclusivo para pacientes por calle lateral. Puedes usar el botón 'Cómo Llegar' en la portada para ver el mapa.",
+      "Nuestra Sede Central está en **Gral. Juan Lavalle 735, J5400 San Juan**. Contamos con estacionamiento exclusivo para pacientes por calle lateral. Puedes usar el botón 'Cómo Llegar' en la portada para ver el mapa.",
   },
   {
     keywords: ["guardia", "urgencia", "emergencia", "dolor"],
@@ -241,15 +241,15 @@ function LocationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
             </div>
             <div>
               <p className="mb-1 text-xs font-bold uppercase tracking-wide text-[#447FC1]">Ubicación</p>
-              <p className="text-xl font-bold leading-tight text-[#727376]">Av. Libertador Gral. San Martín</p>
-              <p className="mt-1 text-sm text-gray-400">San Juan, Argentina</p>
+              <p className="text-xl font-bold leading-tight text-[#727376]">Gral. Juan Lavalle 735</p>
+              <p className="mt-1 text-sm text-gray-400">J5400 San Juan, Argentina</p>
             </div>
           </div>
 
           {/* Mapa embebido */}
           <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.5!2d-68.5364!3d-31.5375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMyJzE1LjAiUyA2OMKwMzInMTEuMCJX!5e0!3m2!1ses!2sar!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.5!2d-68.5364!3d-31.5375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMyJzE1LjAiUyA2OMKwMzInMTEuMCJX!5e0!3m2!1ses!2sar!4v1234567890&q=Gral.+Juan+Lavalle+735,+J5400+San+Juan,+San+Juan+Province,+Argentina"
               width="100%"
               height="300"
               style={{ border: 0 }}
@@ -257,13 +257,13 @@ function LocationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="w-full"
-              title="Ubicacion Sanatorio San Juan"
+              title="Ubicacion Sanatorio San Juan - Gral. Juan Lavalle 735"
             />
           </div>
 
           <div className="space-y-3 border-t border-gray-100 pt-6">
             <a
-              href="https://maps.app.goo.gl/ycs6k4kCudKDFxDd9"
+              href="https://www.google.com/maps/search/?api=1&query=Gral.+Juan+Lavalle+735,+J5400+San+Juan,+Argentina"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex w-full items-center justify-center gap-3 rounded-xl bg-[#447FC1] py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-[#3668a0] hover:shadow-[#447FC1]/30"
@@ -823,9 +823,9 @@ function Footer() {
             <li className="flex cursor-pointer items-start gap-3 transition-colors hover:text-white">
               <MapPin size={20} className="mt-0.5 text-[#9FCD5A]" />
               <span>
-                Av. Libertador Gral. San Martín 1234,
+                Gral. Juan Lavalle 735,
                 <br />
-                San Juan, Argentina
+                J5400 San Juan, Argentina
               </span>
             </li>
             <li className="flex cursor-pointer items-center gap-3 transition-colors hover:text-white">
