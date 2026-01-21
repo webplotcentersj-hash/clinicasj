@@ -1243,10 +1243,6 @@ function Technology() {
                   playsInline
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#447FC1]/80 to-transparent opacity-60" />
-                <div className="absolute bottom-8 left-8 text-white">
-                  <p className="mb-1 text-lg font-bold">Tecnología Philips</p>
-                  <p className="text-sm opacity-80">Brilliance 64 Cortes</p>
-                </div>
               </div>
             </div>
           </div>
