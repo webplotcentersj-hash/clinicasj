@@ -589,16 +589,17 @@ function EspecialidadesModal({ isOpen, onClose }: { isOpen: boolean; onClose: ()
   );
 }
 
+// Base de conocimiento mejorada con respuestas más amigables y profesionales
 const KNOWLEDGE_BASE = [
   {
     keywords: ["hola", "buen dia", "buenas", "inicio", "empezar"],
     response:
-      "¡Hola! Soy el asistente virtual inteligente del Sanatorio San Juan. Puedo ayudarte con turnos, horarios, especialidades, obras sociales y mucho más. ¿Qué necesitas saber?",
+      "¡Hola! 👋 Es un placer saludarte. Soy el asistente virtual del Sanatorio San Juan y estoy aquí para ayudarte con toda la información que necesites. Puedo asistirte con turnos, horarios, especialidades, obras sociales y mucho más. ¿En qué puedo ayudarte hoy?",
   },
   {
-    keywords: ["turno", "cita", "reservar", "sacar", "doctor"],
+    keywords: ["turno", "cita", "reservar", "sacar", "doctor", "agendar"],
     response:
-      "Para solicitar un turno tienes 3 opciones rápidas: \n1. A través de nuestro **Portal del Paciente** (botón verde arriba). \n2. Llamando a nuestro Call Center al **0800-SANJUAN**. \n3. Por WhatsApp al 264-1234567. \n¿Te gustaría que te envíe el link directo al portal?",
+      "¡Por supuesto! Te comento las opciones para solicitar tu turno: \n\n1. **Portal del Paciente** - La forma más rápida y sencilla (botón verde en la parte superior de la página). \n2. **Call Center** - Llámanos al **0800-SANJUAN** (7265) y nuestro equipo te ayudará con gusto. \n3. **WhatsApp** - Escríbenos al **264-1234567** para gestionar tu turno. \n\n¿Te gustaría que te guíe en alguna de estas opciones?",
   },
   {
     keywords: [
@@ -609,44 +610,45 @@ const KNOWLEDGE_BASE = [
       "clinica",
       "servicios",
       "traumatologia",
+      "especialidades",
     ],
     response:
-      "Contamos con más de 50 especialidades médicas, incluyendo Cardiología, Pediatría, Obstetricia, Traumatología, Neurología y Cirugía General. Además, tenemos un servicio de Diagnóstico por Imágenes de alta complejidad.",
+      "Excelente pregunta. En el Sanatorio San Juan contamos con más de **50 especialidades médicas** para brindarte la mejor atención. Entre ellas destacamos: Cardiología, Pediatría, Obstetricia, Traumatología, Neurología, Cirugía General, Ginecología, Urología, Gastroenterología y muchas más. \n\nAdemás, disponemos de un servicio de **Diagnóstico por Imágenes** de alta complejidad con tecnología de última generación. ¿Hay alguna especialidad en particular que te interese?",
   },
   {
-    keywords: ["ubicacion", "donde", "llegar", "direccion", "calle", "mapa"],
+    keywords: ["ubicacion", "donde", "llegar", "direccion", "calle", "mapa", "dirección"],
     response:
-      "Nuestra Sede Central está en **Gral. Juan Lavalle 735, J5400 San Juan**. Contamos con estacionamiento exclusivo para pacientes por calle lateral. Puedes usar el botón 'Cómo Llegar' en la portada para ver el mapa.",
+      "Con mucho gusto te indico nuestra ubicación. Nuestra **Sede Central** se encuentra en **Gral. Juan Lavalle 735, J5400 San Juan**. \n\nPara tu comodidad, contamos con **estacionamiento exclusivo** para pacientes por calle lateral. Si necesitas ver el mapa o indicaciones detalladas, puedes usar el botón **'Cómo Llegar'** en la portada de nuestra página web. ¿Te gustaría que te proporcione más información sobre cómo llegar?",
   },
   {
-    keywords: ["guardia", "urgencia", "emergencia", "dolor"],
+    keywords: ["guardia", "urgencia", "emergencia", "dolor", "urgencias"],
     response:
-      "⚠️ Nuestra **Guardia funciona las 24 horas**, los 365 días del año. Atendemos urgencias de Adultos y Pediátricas. Si tienes una emergencia de riesgo de vida, por favor llama inmediatamente al 107 o acude directamente.",
+      "Nuestra **Guardia Médica funciona las 24 horas**, los 365 días del año, para estar siempre disponibles cuando nos necesites. Atendemos tanto urgencias de **Adultos** como **Pediátricas** con un equipo médico altamente capacitado. \n\n⚠️ **Importante:** Si estás experimentando una emergencia de riesgo de vida, por favor llama inmediatamente al **107** o acude directamente a nuestra guardia. Tu salud es nuestra prioridad.",
   },
   {
-    keywords: ["obra social", "prepaga", "cobertura", "osde", "swiss", "provincia", "pami"],
+    keywords: ["obra social", "prepaga", "cobertura", "osde", "swiss", "provincia", "pami", "obra"],
     response:
-      "Trabajamos con las principales obras sociales y prepagas del país, incluyendo Obra Social Provincia, OSDE, Swiss Medical, Galeno, Sancor Salud, entre otras. Para consultar una cobertura específica, te recomiendo llamar a administración al 0264-4222222.",
+      "Trabajamos con las principales obras sociales y prepagas del país para facilitar tu acceso a nuestros servicios. Entre ellas se encuentran: Obra Social Provincia, OSDE, Swiss Medical, Galeno, Sancor Salud, PAMI y muchas otras. \n\nPara consultar si tu obra social o prepaga tiene cobertura con nosotros, o para obtener información específica sobre tu plan, te recomiendo contactar a nuestro departamento de administración al **0264-4222222**. Ellos te brindarán toda la información detallada. ¿Te gustaría que te ayude con algo más?",
   },
   {
-    keywords: ["horario", "atencion", "abierto", "hora"],
+    keywords: ["horario", "atencion", "abierto", "hora", "horarios"],
     response:
-      "Te detallo nuestros horarios: \n• **Guardia:** 24 hs. \n• **Laboratorio:** Lunes a Viernes de 7:00 a 20:00 hs. \n• **Consultorios Externos:** Lunes a Viernes de 8:00 a 21:00 hs. \n• **Visitas a Internación:** Todos los días de 11:00 a 13:00 y de 17:00 a 19:00 hs.",
+      "Te comparto nuestros horarios de atención para que puedas planificar tu visita: \n\n• **Guardia:** 24 horas, todos los días \n• **Laboratorio:** Lunes a Viernes de 7:00 a 20:00 hs \n• **Consultorios Externos:** Lunes a Viernes de 8:00 a 21:00 hs \n• **Visitas a Internación:** Todos los días de 11:00 a 13:00 hs y de 17:00 a 19:00 hs \n\n¿Necesitas información sobre algún servicio en particular?",
   },
   {
-    keywords: ["laboratorio", "analisis", "sangre", "resultados"],
+    keywords: ["laboratorio", "analisis", "sangre", "resultados", "estudios"],
     response:
-      "El laboratorio atiende por orden de llegada de 7:00 a 10:00 hs para extracciones. Los resultados los puedes descargar directamente desde nuestra web en la sección 'Resultados Online' sin necesidad de venir a buscarlos.",
+      "Nuestro laboratorio atiende por orden de llegada de **7:00 a 10:00 hs** para las extracciones. La buena noticia es que puedes descargar tus resultados directamente desde nuestra página web en la sección **'Resultados Online'**, sin necesidad de venir personalmente a buscarlos. \n\nEsto te ahorra tiempo y te permite acceder a tus estudios desde la comodidad de tu hogar. ¿Hay algo más en lo que pueda ayudarte?",
   },
   {
-    keywords: ["telefono", "contacto", "llamar", "numero", "whatsapp"],
+    keywords: ["telefono", "contacto", "llamar", "numero", "whatsapp", "teléfono"],
     response:
-      "Nuestros canales de contacto son: \n• Teléfono: 0800-SANJUAN (7265) \n• WhatsApp Turnos: 264-1234567 \n• Conmutador: 0264-4222222 \n• Email: info@sanatoriosanjuan.com",
+      "Estamos aquí para ayudarte. Puedes contactarnos a través de cualquiera de estos canales: \n\n• **Teléfono gratuito:** 0800-SANJUAN (7265) \n• **WhatsApp para Turnos:** 264-1234567 \n• **Conmutador:** 0264-4222222 \n• **Email:** info@sanatoriosanjuan.com \n\nNuestro equipo está disponible para responder todas tus consultas. ¿En qué más puedo asistirte?",
   },
   {
-    keywords: ["tecnologia", "tomografo", "equipo", "resonancia"],
+    keywords: ["tecnologia", "tomografo", "equipo", "resonancia", "tecnología", "equipos"],
     response:
-      "Estamos orgullosos de contar con el tomógrafo **Philips Brilliance de 64 cortes**, único en la región, que permite diagnósticos cardíacos y cerebrales de altísima precisión en segundos. También contamos con Resonancia Magnética y Ecografía 4D.",
+      "Nos enorgullece contar con tecnología médica de vanguardia. Contamos con el **tomógrafo Philips Brilliance de 64 cortes**, único en la región, que nos permite realizar diagnósticos cardíacos y cerebrales de altísima precisión en cuestión de segundos. \n\nAdemás, disponemos de **Resonancia Magnética** y **Ecografía 4D** para brindarte los mejores estudios diagnósticos. Nuestro compromiso es ofrecerte la mejor tecnología al servicio de tu salud. ¿Te gustaría conocer más sobre alguno de estos estudios?",
   },
 ] as const;
 
@@ -1267,21 +1269,56 @@ function GeminiAssistant() {
     window.speechSynthesis.speak(utterance);
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!inputText.trim()) return;
 
     const userMsg = { id: Date.now(), text: inputText, sender: "user" as const };
     setMessages((prev) => [...prev, userMsg]);
+    const currentInput = inputText;
     setInputText("");
     setIsTyping(true);
 
-    setTimeout(() => {
-      const botResponseText = findBestResponse(userMsg.text);
+    try {
+      // Construir historial de conversación para Gemini
+      const conversationHistory = messages
+        .filter((msg) => msg.sender !== "user" || msg.id !== userMsg.id)
+        .map((msg) => ({
+          role: msg.sender === "user" ? "user" : "assistant",
+          content: msg.text,
+        }));
+
+      // Intentar usar Gemini API
+      const response = await fetch("/api/ai/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: currentInput,
+          conversationHistory,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.message) {
+        const botMsg = { id: Date.now() + 1, text: data.message, sender: "bot" as const };
+        setMessages((prev) => [...prev, botMsg]);
+        setIsTyping(false);
+        if (autoSpeak) speakText(data.message);
+      } else {
+        // Fallback a base de conocimiento
+        throw new Error("Gemini no disponible");
+      }
+    } catch (error) {
+      // Fallback a base de conocimiento si Gemini falla
+      console.log("Usando base de conocimiento como fallback:", error);
+      const botResponseText = findBestResponse(currentInput);
       const botMsg = { id: Date.now() + 1, text: botResponseText, sender: "bot" as const };
       setMessages((prev) => [...prev, botMsg]);
       setIsTyping(false);
       if (autoSpeak) speakText(botResponseText);
-    }, 1200);
+    }
   };
 
   return (
