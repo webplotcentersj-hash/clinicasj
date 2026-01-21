@@ -235,9 +235,17 @@ function TurnosModal({
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
           <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
         <div className="flex items-center justify-between border-b border-gray-100 bg-white p-6">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[#447FC1]">Turnos</p>
-            <h3 className="mt-1 text-2xl font-extrabold text-[#727376]">Solicitar turno</h3>
+          <div className="flex items-center gap-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/ssj-logo-header.png"
+              alt="Sanatorio San Juan Logo"
+              className="h-10 w-auto object-contain"
+            />
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#447FC1]">Turnos</p>
+              <h3 className="mt-1 text-2xl font-extrabold text-[#727376]">Solicitar turno</h3>
+            </div>
           </div>
           <button
             onClick={onClose}
