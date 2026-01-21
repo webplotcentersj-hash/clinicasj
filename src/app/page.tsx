@@ -916,16 +916,19 @@ function Hero() {
         />
       </div>
 
-      <div className="container relative z-20 mx-auto flex flex-col items-center px-6 pt-20 text-center md:items-start md:text-left">
-        {/* Logo transparente */}
-        <div className="mb-8 flex justify-center md:mb-10 md:justify-start">
+      {/* Logo a la derecha y centrado verticalmente */}
+      <div className="absolute right-6 top-1/2 z-30 -translate-y-1/2 md:right-12">
+        <div className="rounded-2xl bg-white/20 p-6 backdrop-blur-md shadow-2xl ring-2 ring-white/30">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/ssj-logo-header.png"
             alt="Sanatorio San Juan"
-            className="h-24 w-auto opacity-90 drop-shadow-2xl md:h-32"
+            className="h-28 w-auto md:h-40"
           />
         </div>
+      </div>
+
+      <div className="container relative z-20 mx-auto flex flex-col items-center px-6 pt-20 text-center md:items-start md:text-left">
 
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/20 px-4 py-2 text-sm font-semibold text-white shadow-sm backdrop-blur-md">
           <span className="h-2 w-2 animate-pulse rounded-full bg-[#9FCD5A]" />
