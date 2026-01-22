@@ -741,22 +741,22 @@ function Header() {
         isScrolled ? "bg-white/95 py-3 shadow-lg backdrop-blur-md" : "bg-transparent py-5"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-6">
+      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center transition-all duration-500">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/ssj-logo-header.png"
             alt="Sanatorio San Juan Logo"
-            className={`object-contain transition-all duration-500 ${isScrolled ? "h-14 md:h-16" : "h-16 md:h-20"}`}
+            className={`object-contain transition-all duration-500 ${isScrolled ? "h-12 sm:h-14 md:h-16 lg:h-18" : "h-14 sm:h-16 md:h-20 lg:h-24"}`}
           />
         </div>
 
-        <nav className="hidden items-center space-x-8 md:flex">
+        <nav className="hidden items-center space-x-4 md:space-x-6 lg:space-x-8 xl:flex">
           {navItems.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className={`group relative text-sm font-bold uppercase tracking-wide transition-colors ${
+              className={`group relative text-xs md:text-sm lg:text-base font-bold uppercase tracking-wide transition-colors ${
                 isScrolled ? "text-[#727376] hover:text-[#447FC1]" : "text-white hover:text-[#9FCD5A] drop-shadow-md"
               }`}
             >
@@ -769,12 +769,13 @@ function Header() {
             </a>
           ))}
           <button
-            className="flex items-center gap-2 rounded-full px-6 py-3 font-bold text-white shadow-xl transition-all hover:scale-105 hover:shadow-green-500/30"
+            className="flex items-center gap-2 rounded-full px-4 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-3.5 text-sm md:text-base font-bold text-white shadow-xl transition-all hover:scale-105 hover:shadow-green-500/30"
             style={{ backgroundColor: COLORS.green }}
             type="button"
           >
-            <Calendar size={18} />
-            Portal Paciente
+            <Calendar size={16} className="md:size-5" />
+            <span className="hidden lg:inline">Portal Paciente</span>
+            <span className="lg:hidden">Portal</span>
           </button>
         </nav>
 
@@ -916,46 +917,46 @@ function Hero() {
         />
       </div>
 
-      <div className="container relative z-20 mx-auto flex flex-col items-center px-6 pt-20 text-center md:items-start md:text-left">
+      <div className="container relative z-20 mx-auto flex flex-col items-center px-4 pt-16 text-center sm:px-6 sm:pt-20 md:items-start md:text-left lg:px-8 lg:pt-24">
 
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/20 px-4 py-2 text-sm font-semibold text-white shadow-sm backdrop-blur-md">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/20 px-3 py-1.5 text-xs font-semibold text-white shadow-sm backdrop-blur-md sm:mb-6 sm:px-4 sm:py-2 sm:text-sm lg:px-5 lg:py-2.5 lg:text-base">
           <span className="h-2 w-2 animate-pulse rounded-full bg-[#9FCD5A]" />
           Líderes en Innovación Médica
         </div>
 
-        <h1 className="mb-6 text-5xl font-extrabold leading-[1.1] text-white drop-shadow-xl md:text-7xl">
+        <h1 className="mb-4 text-4xl font-extrabold leading-[1.1] text-white drop-shadow-xl sm:mb-6 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
           Tu Salud <br />
           <span className="bg-gradient-to-r from-white via-[#9FCD5A] to-white bg-clip-text text-transparent drop-shadow-lg">
             Nuestra Prioridad
           </span>
         </h1>
 
-        <p className="mb-10 max-w-2xl text-xl font-light leading-relaxed text-gray-50 drop-shadow-md md:text-2xl">
+        <p className="mb-8 max-w-2xl text-base font-light leading-relaxed text-gray-50 drop-shadow-md sm:mb-10 sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
           Tecnología de última generación y calidez humana se unen para brindarte la mejor atención médica de la región.
         </p>
 
-        <div className="flex w-full flex-col items-center gap-4 md:w-auto md:flex-row">
+        <div className="flex w-full flex-col items-center gap-3 sm:gap-4 md:w-auto md:flex-row lg:gap-5">
           <button
-            className="group flex w-full items-center justify-center gap-3 rounded-full bg-[#9FCD5A] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50 md:w-auto"
+            className="group flex w-full items-center justify-center gap-2 rounded-full bg-[#9FCD5A] px-6 py-3 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50 sm:gap-3 sm:px-8 sm:py-4 sm:text-lg md:w-auto lg:px-10 lg:py-5 lg:text-xl"
             type="button"
             onClick={() => setShowTurnosModal(true)}
           >
-            <Calendar className="transition-transform group-hover:rotate-12" />
+            <Calendar className="transition-transform group-hover:rotate-12" size={18} />
             Solicitar Turno
           </button>
 
           <button
             onClick={() => setShowLocationModal(true)}
-            className="flex w-full items-center justify-center gap-3 rounded-full border border-white/40 bg-white/10 px-8 py-4 text-lg font-bold text-white shadow-lg backdrop-blur-md transition-all hover:-translate-y-1 hover:bg-white hover:text-[#447FC1] md:w-auto"
+            className="flex w-full items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-base font-bold text-white shadow-lg backdrop-blur-md transition-all hover:-translate-y-1 hover:bg-white hover:text-[#447FC1] sm:gap-3 sm:px-8 sm:py-4 sm:text-lg md:w-auto lg:px-10 lg:py-5 lg:text-xl"
             type="button"
           >
-            <MapPin />
+            <MapPin size={18} />
             Cómo Llegar
           </button>
 
           <a
             href="#especialidades"
-            className="flex w-full items-center justify-center gap-2 text-lg font-semibold text-white transition-colors hover:text-[#9FCD5A] md:w-auto"
+            className="flex w-full items-center justify-center gap-2 text-base font-semibold text-white transition-colors hover:text-[#9FCD5A] sm:text-lg md:w-auto lg:text-xl"
           >
             Especialidades <ArrowRight size={18} />
           </a>
@@ -991,27 +992,27 @@ function QuickLinks() {
   ] as const;
 
   return (
-    <section className="relative z-30 -mt-24 pb-20">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+    <section className="relative z-30 -mt-16 pb-12 sm:-mt-20 sm:pb-16 md:-mt-24 md:pb-20 lg:pb-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3 lg:gap-8">
           {cards.map((card) => (
             <a
               key={card.title}
               href="#"
-              className={`group relative flex h-48 flex-col justify-center overflow-hidden rounded-2xl px-8 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${card.bgColor} ${card.hoverColor}`}
+              className={`group relative flex h-40 flex-col justify-center overflow-hidden rounded-2xl px-6 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl sm:h-48 sm:px-8 md:h-52 lg:h-56 lg:px-10 ${card.bgColor} ${card.hoverColor}`}
             >
               <div className="absolute right-0 top-0 translate-x-4 -translate-y-4 p-4 opacity-10 transition-transform duration-500 group-hover:scale-150">
-                <card.icon size={120} className="text-white" />
+                <card.icon size={100} className="text-white sm:size-[120px] lg:size-[140px]" />
               </div>
 
               <div className="relative z-10 text-white">
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-white/20 shadow-inner backdrop-blur-sm">
-                  <card.icon size={28} className="text-white" />
+                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 shadow-inner backdrop-blur-sm sm:mb-4 sm:h-14 sm:w-14 lg:h-16 lg:w-16">
+                  <card.icon size={24} className="text-white sm:size-7 lg:size-8" />
                 </div>
-                <h3 className="mb-1 flex items-center gap-2 text-2xl font-bold">{card.title}</h3>
-                <p className="mb-3 text-sm font-medium text-white/90">{card.desc}</p>
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider opacity-80 transition-all group-hover:gap-3 group-hover:opacity-100">
-                  Ingresar <ArrowRight size={14} />
+                <h3 className="mb-1 flex items-center gap-2 text-xl font-bold sm:text-2xl lg:text-3xl">{card.title}</h3>
+                <p className="mb-2 text-xs font-medium text-white/90 sm:mb-3 sm:text-sm lg:text-base">{card.desc}</p>
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider opacity-80 transition-all group-hover:gap-3 group-hover:opacity-100 lg:text-sm">
+                  Ingresar <ArrowRight size={14} className="lg:size-4" />
                 </div>
               </div>
             </a>
@@ -1026,8 +1027,8 @@ function Institucional() {
   const [showInstitucionalVideo, setShowInstitucionalVideo] = useState(false);
 
   return (
-    <section id="institucional" className="bg-white py-24">
-      <div className="container mx-auto px-6">
+    <section id="institucional" className="bg-white py-16 sm:py-20 md:py-24 lg:py-32">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {showInstitucionalVideo && (
           <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
             <div
@@ -1057,43 +1058,43 @@ function Institucional() {
           </div>
         )}
 
-        <div className="mx-auto max-w-6xl">
-          <span className="rounded-full bg-[#447FC1]/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#447FC1]">
+        <div className="mx-auto max-w-7xl">
+          <span className="rounded-full bg-[#447FC1]/10 px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-[#447FC1] sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 lg:text-sm">
             Institucional
           </span>
-          <div className="mt-6 grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
             <div>
-              <h2 className="text-4xl font-extrabold text-[#727376] md:text-5xl">
+              <h2 className="text-3xl font-extrabold text-[#727376] sm:text-4xl md:text-5xl lg:text-6xl">
                 Centro quirúrgico y <span className="text-[#9FCD5A]">cuidados intensivos</span>
               </h2>
-              <p className="mt-4 text-sm font-bold uppercase tracking-widest text-[#447FC1]">Sobre el SSJ</p>
-              <p className="mt-4 text-lg leading-relaxed text-gray-600">
+              <p className="mt-3 text-xs font-bold uppercase tracking-widest text-[#447FC1] sm:mt-4 sm:text-sm lg:text-base">Sobre el SSJ</p>
+              <p className="mt-3 text-base leading-relaxed text-gray-600 sm:mt-4 sm:text-lg lg:text-xl">
                 Somos una empresa de salud dedicada al cuidado de pacientes adultos con enfermedades agudas y crónicas,
                 que requieran atención médica especializada, tanto clínica como quirúrgica.
               </p>
-              <p className="mt-4 text-lg leading-relaxed text-gray-600">
+              <p className="mt-3 text-base leading-relaxed text-gray-600 sm:mt-4 sm:text-lg lg:text-xl">
                 Sanatorio San Juan cuenta con guardia de urgencias 24 hs, atención ambulatoria, internación clínica,
                 internación quirúrgica y terapia intensiva.
               </p>
-              <p className="mt-4 text-lg leading-relaxed text-gray-600">
+              <p className="mt-3 text-base leading-relaxed text-gray-600 sm:mt-4 sm:text-lg lg:text-xl">
                 Disponemos de un amplio equipo de médicos especialistas y profesionales altamente capacitados.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row lg:gap-4">
                 <button
                   type="button"
                   onClick={() => setShowInstitucionalVideo(true)}
-                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#447FC1] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#3668a0] hover:shadow-[#447FC1]/30"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#447FC1] px-6 py-3 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#3668a0] hover:shadow-[#447FC1]/30 sm:gap-3 sm:px-8 sm:py-4 sm:text-lg lg:px-10 lg:py-5 lg:text-xl"
                 >
                   Ver video
-                  <PlayCircle size={20} className="transition-transform group-hover:scale-110" />
+                  <PlayCircle size={18} className="transition-transform group-hover:scale-110 sm:size-5" />
                 </button>
                 <a
                   href="#contacto"
-                  className="inline-flex items-center justify-center gap-3 rounded-full border-2 border-[#9FCD5A] bg-white px-8 py-4 text-lg font-bold text-[#727376] shadow-lg transition-all hover:-translate-y-1 hover:bg-[#9FCD5A]/10"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#9FCD5A] bg-white px-6 py-3 text-base font-bold text-[#727376] shadow-lg transition-all hover:-translate-y-1 hover:bg-[#9FCD5A]/10 sm:gap-3 sm:px-8 sm:py-4 sm:text-lg lg:px-10 lg:py-5 lg:text-xl"
                 >
                   Consultar
-                  <ArrowRight size={18} />
+                  <ArrowRight size={18} className="sm:size-5" />
                 </a>
               </div>
             </div>
@@ -1126,7 +1127,7 @@ function ServiceCard({
   color?: "blue" | "green";
 }) {
   return (
-    <div className="group relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+    <div className="group relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-6 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl sm:p-8 lg:p-10">
       <div
         className={`absolute right-0 top-0 -mr-8 -mt-8 h-32 w-32 rounded-bl-full bg-gradient-to-br ${
           color === "green" ? "from-[#9FCD5A]/20" : "from-[#447FC1]/20"
@@ -1134,25 +1135,25 @@ function ServiceCard({
       />
 
       <div
-        className={`mb-6 flex h-16 w-16 items-center justify-center rounded-2xl text-white shadow-sm transition-transform duration-300 group-hover:rotate-6 ${
+        className={`mb-4 flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow-sm transition-transform duration-300 group-hover:rotate-6 sm:mb-6 sm:h-16 sm:w-16 lg:h-20 lg:w-20 ${
           color === "green" ? "bg-[#9FCD5A]" : "bg-[#447FC1]"
         }`}
       >
-        <Icon size={32} />
+        <Icon size={28} className="sm:size-8 lg:size-10" />
       </div>
 
-      <h3 className="mb-3 text-2xl font-bold text-[#727376] transition-colors group-hover:text-[#447FC1]">
+      <h3 className="mb-2 text-xl font-bold text-[#727376] transition-colors group-hover:text-[#447FC1] sm:mb-3 sm:text-2xl lg:text-3xl">
         {title}
       </h3>
-      <p className="mb-8 leading-relaxed text-gray-500">{desc}</p>
+      <p className="mb-6 text-sm leading-relaxed text-gray-500 sm:mb-8 sm:text-base lg:text-lg">{desc}</p>
 
       <a
         href="#"
-        className={`inline-flex items-center text-sm font-bold uppercase tracking-wider transition-all hover:underline group-hover:gap-2 ${
+        className={`inline-flex items-center text-xs font-bold uppercase tracking-wider transition-all hover:underline group-hover:gap-2 sm:text-sm lg:text-base ${
           color === "green" ? "text-[#9FCD5A]" : "text-[#447FC1]"
         }`}
       >
-        Saber más <ArrowRight size={16} className="ml-2" />
+        Saber más <ArrowRight size={14} className="ml-2 sm:size-4 lg:size-5" />
       </a>
     </div>
   );
@@ -1162,7 +1163,7 @@ function Services() {
   const [showEspecialidadesModal, setShowEspecialidadesModal] = useState(false);
 
   return (
-    <section className="relative overflow-hidden bg-gray-50 pb-24 pt-24" id="especialidades">
+    <section className="relative overflow-hidden bg-gray-50 pb-16 pt-16 sm:pb-20 sm:pt-20 md:pb-24 md:pt-24 lg:pb-32 lg:pt-32" id="especialidades">
       <EspecialidadesModal
         isOpen={showEspecialidadesModal}
         onClose={() => setShowEspecialidadesModal(false)}
@@ -1172,28 +1173,28 @@ function Services() {
         <div className="absolute bottom-20 right-10 h-96 w-96 rounded-full bg-[#9FCD5A]/10 blur-3xl" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-6">
-        <div className="mb-20 text-center">
-          <span className="rounded-full bg-[#447FC1]/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#447FC1]">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center sm:mb-16 md:mb-20 lg:mb-24">
+          <span className="rounded-full bg-[#447FC1]/10 px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-[#447FC1] sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 lg:text-sm">
             Nuestros Servicios
           </span>
-          <h2 className="mb-6 mt-4 text-4xl font-extrabold text-[#727376] md:text-5xl">
+          <h2 className="mb-4 mt-3 text-3xl font-extrabold text-[#727376] sm:mb-6 sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl">
             Excelencia Médica <span className="text-[#9FCD5A]">Integral</span>
           </h2>
-          <div className="mx-auto h-1.5 w-24 rounded-full bg-gradient-to-r from-[#447FC1] to-[#9FCD5A]" />
+          <div className="mx-auto h-1.5 w-24 rounded-full bg-gradient-to-r from-[#447FC1] to-[#9FCD5A] lg:w-32" />
 
-          <div className="mx-auto mt-8 flex w-full flex-col items-center justify-center gap-4 md:w-auto md:flex-row">
+          <div className="mx-auto mt-6 flex w-full flex-col items-center justify-center gap-3 sm:mt-8 sm:gap-4 md:w-auto md:flex-row lg:gap-5">
             <button
-              className="group flex w-full items-center justify-center gap-3 rounded-full bg-[#9FCD5A] px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50 md:w-auto"
+              className="group flex w-full items-center justify-center gap-2 rounded-full bg-[#9FCD5A] px-6 py-3 text-base font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#8ec049] hover:shadow-green-400/50 sm:gap-3 sm:px-8 sm:py-4 sm:text-lg md:w-auto lg:px-10 lg:py-5 lg:text-xl"
               type="button"
               onClick={() => setShowEspecialidadesModal(true)}
             >
-              <Calendar className="transition-transform group-hover:rotate-12" />
+              <Calendar className="transition-transform group-hover:rotate-12" size={18} />
               Ver todas las especialidades
             </button>
             <a
               href="#contacto"
-              className="flex w-full items-center justify-center gap-3 rounded-full border-2 border-[#447FC1] bg-white px-8 py-4 text-lg font-bold text-[#447FC1] shadow-lg transition-all hover:-translate-y-1 hover:bg-[#447FC1] hover:text-white md:w-auto"
+              className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-[#447FC1] bg-white px-6 py-3 text-base font-bold text-[#447FC1] shadow-lg transition-all hover:-translate-y-1 hover:bg-[#447FC1] hover:text-white sm:gap-3 sm:px-8 sm:py-4 sm:text-lg md:w-auto lg:px-10 lg:py-5 lg:text-xl"
             >
               Consultar por WhatsApp
               <MessageSquare size={18} />
@@ -1201,7 +1202,7 @@ function Services() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3 md:gap-10 lg:gap-12">
           <ServiceCard
             icon={Heart}
             title="Cardiología"
@@ -1228,10 +1229,10 @@ function Services() {
 
 function Technology() {
   return (
-    <section className="overflow-hidden bg-white py-24">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col items-center gap-16 md:flex-row">
-          <div className="group relative md:w-1/2">
+    <section className="overflow-hidden bg-white py-16 sm:py-20 md:py-24 lg:py-32">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center gap-10 sm:gap-12 md:flex-row md:gap-16 lg:gap-20">
+          <div className="group relative w-full md:w-1/2">
             <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-r from-[#447FC1] to-[#9FCD5A] opacity-30 blur-lg transition duration-1000 group-hover:opacity-50" />
             <div className="relative overflow-hidden rounded-[2rem] shadow-2xl">
               <div className="relative aspect-video w-full">
@@ -1248,35 +1249,35 @@ function Technology() {
             </div>
           </div>
 
-          <div className="space-y-8 md:w-1/2">
-            <h2 className="text-4xl font-extrabold leading-tight text-[#727376] md:text-6xl">
+          <div className="w-full space-y-6 sm:space-y-8 md:w-1/2 lg:space-y-10">
+            <h2 className="text-3xl font-extrabold leading-tight text-[#727376] sm:text-4xl md:text-5xl lg:text-6xl">
               Innovación <br />
               <span className="text-[#447FC1]">que Salva Vidas</span>
             </h2>
-            <p className="text-lg leading-relaxed text-gray-500">
+            <p className="text-base leading-relaxed text-gray-500 sm:text-lg lg:text-xl">
               En el Sanatorio San Juan, la tecnología no es un lujo, es una herramienta vital. Invertimos constantemente
               para ofrecerte la seguridad de un diagnóstico acertado.
             </p>
 
-            <div className="grid grid-cols-1 gap-6 pt-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 pt-2 sm:grid-cols-2 sm:gap-6 sm:pt-4 lg:gap-8">
               {[
                 { title: "Alta Resolución", desc: "Imágenes nítidas para diagnósticos precisos." },
                 { title: "Rapidez", desc: "Estudios en segundos, menor ansiedad." },
                 { title: "Seguridad", desc: "Menor radiación para el paciente." },
                 { title: "Digital", desc: "Resultados disponibles en la nube." },
               ].map((item) => (
-                <div key={item.title} className="flex gap-4">
-                  <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#9FCD5A]" />
+                <div key={item.title} className="flex gap-3 sm:gap-4">
+                  <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#9FCD5A] lg:mt-1.5 lg:h-2.5 lg:w-2.5" />
                   <div>
-                    <h4 className="font-bold text-[#447FC1]">{item.title}</h4>
-                    <p className="text-sm text-gray-500">{item.desc}</p>
+                    <h4 className="text-sm font-bold text-[#447FC1] sm:text-base lg:text-lg">{item.title}</h4>
+                    <p className="text-xs text-gray-500 sm:text-sm lg:text-base">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
 
             <button
-              className="mt-8 rounded-full border-2 border-[#727376] px-8 py-3 font-bold text-[#727376] transition-all hover:bg-[#727376] hover:text-white hover:shadow-lg"
+              className="mt-6 rounded-full border-2 border-[#727376] px-6 py-2.5 text-sm font-bold text-[#727376] transition-all hover:bg-[#727376] hover:text-white hover:shadow-lg sm:mt-8 sm:px-8 sm:py-3 sm:text-base lg:px-10 lg:py-4 lg:text-lg"
               type="button"
             >
               Conocer Equipamiento
@@ -1474,46 +1475,46 @@ function GeminiAssistant() {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-28 right-8 z-50 flex h-[550px] w-80 flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl md:w-96">
-          <div className="flex items-center justify-between bg-gradient-to-r from-[#447FC1] to-[#6FA8DC] p-6 text-white">
+        <div className="fixed bottom-28 right-8 z-50 flex h-[550px] w-80 flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl md:h-[600px] md:w-96 lg:bottom-8 lg:right-12 lg:h-[700px] lg:w-[500px] xl:w-[600px]">
+          <div className="flex items-center justify-between bg-gradient-to-r from-[#447FC1] to-[#6FA8DC] p-4 text-white lg:p-6">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-                <Bot size={24} className="text-white" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm lg:h-12 lg:w-12">
+                <Bot size={24} className="text-white lg:size-7" />
               </div>
               <div>
-                <span className="block text-lg font-bold">Asistente Virtual</span>
-                <span className="text-xs text-white/80">Sanatorio San Juan</span>
+                <span className="block text-lg font-bold lg:text-xl">Asistente Virtual</span>
+                <span className="text-xs text-white/80 lg:text-sm">Sanatorio San Juan</span>
               </div>
             </div>
             <div className="flex flex-col items-end">
               <button
                 onClick={() => setAutoSpeak((v) => !v)}
-                className={`mb-1 rounded p-1 transition-colors ${autoSpeak ? "bg-white/20 text-white" : "text-white/60 hover:text-white"}`}
+                className={`mb-1 rounded p-1 transition-colors lg:p-2 ${autoSpeak ? "bg-white/20 text-white" : "text-white/60 hover:text-white"}`}
                 title={autoSpeak ? "Desactivar respuesta de voz automática" : "Activar respuesta de voz automática"}
                 type="button"
               >
-                {autoSpeak ? <Volume2 size={16} /> : <VolumeX size={16} />}
+                {autoSpeak ? <Volume2 size={16} className="lg:size-5" /> : <VolumeX size={16} className="lg:size-5" />}
               </button>
               <div className="flex items-center gap-1">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-[#9FCD5A]" />
-                <span className="text-[10px] font-bold uppercase tracking-wider opacity-80">Online</span>
+                <span className="h-2 w-2 animate-pulse rounded-full bg-[#9FCD5A] lg:h-2.5 lg:w-2.5" />
+                <span className="text-[10px] font-bold uppercase tracking-wider opacity-80 lg:text-xs">Online</span>
               </div>
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto bg-gray-50 p-5">
-            <div className="space-y-5">
+          <div className="flex-1 overflow-y-auto bg-gray-50 p-4 lg:p-6">
+            <div className="space-y-4 lg:space-y-6">
               {messages.map((msg) => (
                 <div key={msg.id} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
                   <div
-                    className={`group relative max-w-[85%] rounded-2xl p-4 text-sm leading-relaxed shadow-sm ${
+                    className={`group relative max-w-[85%] rounded-2xl p-3 text-sm leading-relaxed shadow-sm lg:max-w-[75%] lg:p-4 lg:text-base lg:leading-relaxed ${
                       msg.sender === "user"
                         ? "rounded-tr-none bg-[#447FC1] text-white"
                         : "rounded-tl-none border border-gray-100 bg-white text-gray-700"
                     }`}
                   >
                     {msg.text.split("\n").map((line, i) => (
-                      <p key={i} className={i > 0 ? "mt-2" : ""}>
+                      <p key={i} className={i > 0 ? "mt-2 lg:mt-3" : ""}>
                         {line.split("**").map((part, j) =>
                           j % 2 === 1 ? <strong key={j}>{part}</strong> : part,
                         )}
@@ -1523,11 +1524,11 @@ function GeminiAssistant() {
                     {msg.sender === "bot" && (
                       <button
                         onClick={() => speakText(msg.text)}
-                        className="absolute -right-10 top-2 rounded-full bg-white p-2 text-gray-500 opacity-0 shadow-md transition-all hover:text-[#9FCD5A] group-hover:opacity-100"
+                        className="absolute -right-10 top-2 rounded-full bg-white p-2 text-gray-500 opacity-0 shadow-md transition-all hover:text-[#9FCD5A] group-hover:opacity-100 lg:-right-12 lg:p-2.5"
                         title="Volver a escuchar"
                         type="button"
                       >
-                        <Volume2 size={18} />
+                        <Volume2 size={18} className="lg:size-5" />
                       </button>
                     )}
                   </div>
@@ -1536,10 +1537,10 @@ function GeminiAssistant() {
 
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="flex items-center gap-1.5 rounded-2xl rounded-tl-none border border-gray-100 bg-white p-4 shadow-sm">
-                    <div className="h-2 w-2 animate-bounce rounded-full bg-[#447FC1]" style={{ animationDelay: "0s" }} />
-                    <div className="h-2 w-2 animate-bounce rounded-full bg-[#9FCD5A]" style={{ animationDelay: "0.2s" }} />
-                    <div className="h-2 w-2 animate-bounce rounded-full bg-[#447FC1]" style={{ animationDelay: "0.4s" }} />
+                  <div className="flex items-center gap-1.5 rounded-2xl rounded-tl-none border border-gray-100 bg-white p-4 shadow-sm lg:gap-2 lg:p-5">
+                    <div className="h-2 w-2 animate-bounce rounded-full bg-[#447FC1] lg:h-2.5 lg:w-2.5" style={{ animationDelay: "0s" }} />
+                    <div className="h-2 w-2 animate-bounce rounded-full bg-[#9FCD5A] lg:h-2.5 lg:w-2.5" style={{ animationDelay: "0.2s" }} />
+                    <div className="h-2 w-2 animate-bounce rounded-full bg-[#447FC1] lg:h-2.5 lg:w-2.5" style={{ animationDelay: "0.4s" }} />
                   </div>
                 </div>
               )}
@@ -1548,25 +1549,25 @@ function GeminiAssistant() {
             </div>
           </div>
 
-          <div className="border-t border-gray-100 bg-white p-4">
+          <div className="border-t border-gray-100 bg-white p-3 lg:p-5">
             {recognitionError && (
-              <div className="mb-2 rounded-lg bg-red-50 p-2 text-xs text-red-600">
+              <div className="mb-2 rounded-lg bg-red-50 p-2 text-xs text-red-600 lg:p-3 lg:text-sm">
                 {recognitionError}
               </div>
             )}
-            <div className="flex items-center gap-2 rounded-full border border-transparent bg-gray-100 px-2 py-2 pl-4 transition-all focus-within:border-[#447FC1] focus-within:bg-white">
+            <div className="flex items-center gap-2 rounded-full border border-transparent bg-gray-100 px-2 py-2 pl-4 transition-all focus-within:border-[#447FC1] focus-within:bg-white lg:gap-3 lg:px-3 lg:py-3 lg:pl-5">
               <input
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSend()}
                 placeholder={isListening ? "Escuchando..." : "Pregunta sobre turnos, guardia..."}
-                className="flex-1 bg-transparent text-sm text-gray-700 outline-none placeholder-gray-400"
+                className="flex-1 bg-transparent text-sm text-gray-700 outline-none placeholder-gray-400 lg:text-base"
                 disabled={isListening}
               />
               <button
                 onClick={isListening ? stopListening : startListening}
-                className={`rounded-full p-2 transition-all ${
+                className={`rounded-full p-2 transition-all lg:p-2.5 ${
                   isListening
                     ? "bg-red-100 text-red-600 animate-pulse"
                     : "text-gray-400 hover:bg-gray-100 hover:text-[#447FC1]"
@@ -1574,25 +1575,25 @@ function GeminiAssistant() {
                 type="button"
                 title={isListening ? "Detener grabación" : "Hablar con el micrófono"}
               >
-                <Mic size={18} className={isListening ? "animate-pulse" : ""} />
+                <Mic size={18} className={`lg:size-5 ${isListening ? "animate-pulse" : ""}`} />
               </button>
               <button
                 onClick={handleSend}
                 disabled={!inputText.trim() || isListening}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#9FCD5A] text-white transition-all hover:bg-[#8ec049] hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#9FCD5A] text-white transition-all hover:bg-[#8ec049] hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed lg:h-12 lg:w-12"
                 type="button"
               >
-                <Send size={16} />
+                <Send size={16} className="lg:size-5" />
               </button>
             </div>
             {isListening && (
-              <div className="mt-2 flex items-center justify-center gap-2">
-                <div className="h-2 w-2 animate-pulse rounded-full bg-red-500" />
-                <span className="text-xs text-red-600">Grabando... Habla ahora</span>
+              <div className="mt-2 flex items-center justify-center gap-2 lg:mt-3">
+                <div className="h-2 w-2 animate-pulse rounded-full bg-red-500 lg:h-2.5 lg:w-2.5" />
+                <span className="text-xs text-red-600 lg:text-sm">Grabando... Habla ahora</span>
               </div>
             )}
-            <div className="mt-2 text-center">
-              <span className="text-[10px] text-gray-400">Powered by Plot Center Technology</span>
+            <div className="mt-2 text-center lg:mt-3">
+              <span className="text-[10px] text-gray-400 lg:text-xs">Powered by Plot Center Technology</span>
             </div>
           </div>
         </div>
@@ -1622,7 +1623,7 @@ function GalleryCarousel() {
 
   return (
     <section className="relative w-full overflow-hidden bg-gray-900">
-      <div className="relative h-[700px] w-full md:h-[800px] lg:h-[900px]">
+      <div className="relative h-[400px] w-full sm:h-[500px] md:h-[600px] lg:h-[700px] xl:h-[800px]">
         {images.map((src, index) => (
           <div
             key={index}
@@ -1663,42 +1664,42 @@ function GalleryCarousel() {
 
 function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#727376] py-16 text-white" id="contacto">
+    <footer className="relative overflow-hidden bg-[#727376] py-12 text-white sm:py-16 lg:py-20" id="contacto">
       <div className="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-[#447FC1] to-[#9FCD5A]" />
-      <div className="container relative z-10 mx-auto grid grid-cols-1 gap-12 px-6 md:grid-cols-4">
-        <div className="space-y-6">
-          <div className="inline-block rounded-xl bg-white/10 p-4 backdrop-blur-sm">
+      <div className="container relative z-10 mx-auto grid grid-cols-1 gap-8 px-4 sm:gap-10 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:px-8">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="inline-block rounded-xl bg-white/10 p-3 backdrop-blur-sm sm:p-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/ssj-logo.webp" alt="Sanatorio San Juan" className="h-12 object-contain brightness-0 invert" />
+            <img src="/ssj-logo.webp" alt="Sanatorio San Juan" className="h-10 object-contain brightness-0 invert sm:h-12 lg:h-14" />
           </div>
-          <p className="text-sm leading-relaxed text-gray-300">
+          <p className="text-xs leading-relaxed text-gray-300 sm:text-sm lg:text-base">
             Más de medio siglo cuidando lo más valioso. <br /> Tecnología, profesionalismo y humanidad.
           </p>
         </div>
         <div>
-          <h4 className="mb-6 text-lg font-bold text-[#9FCD5A]">Contacto</h4>
-          <ul className="space-y-4 text-sm text-gray-300">
-            <li className="flex cursor-pointer items-start gap-3 transition-colors hover:text-white">
-              <MapPin size={20} className="mt-0.5 text-[#9FCD5A]" />
+          <h4 className="mb-4 text-base font-bold text-[#9FCD5A] sm:mb-6 sm:text-lg lg:text-xl">Contacto</h4>
+          <ul className="space-y-3 text-xs text-gray-300 sm:space-y-4 sm:text-sm lg:text-base">
+            <li className="flex cursor-pointer items-start gap-2 transition-colors hover:text-white sm:gap-3">
+              <MapPin size={18} className="mt-0.5 shrink-0 text-[#9FCD5A] sm:size-5" />
               <span>
                 Gral. Juan Lavalle 735,
                 <br />
                 J5400 San Juan, Argentina
               </span>
             </li>
-            <li className="flex cursor-pointer items-center gap-3 transition-colors hover:text-white">
-              <Phone size={20} className="text-[#9FCD5A]" />
+            <li className="flex cursor-pointer items-center gap-2 transition-colors hover:text-white sm:gap-3">
+              <Phone size={18} className="shrink-0 text-[#9FCD5A] sm:size-5" />
               <span>0800-SANJUAN (7265)</span>
             </li>
-            <li className="flex cursor-pointer items-center gap-3 transition-colors hover:text-white">
-              <MessageSquare size={20} className="text-[#9FCD5A]" />
+            <li className="flex cursor-pointer items-center gap-2 transition-colors hover:text-white sm:gap-3">
+              <MessageSquare size={18} className="shrink-0 text-[#9FCD5A] sm:size-5" />
               <span>info@sanatoriosanjuan.com</span>
             </li>
           </ul>
         </div>
         <div>
-          <h4 className="mb-6 text-lg font-bold text-[#9FCD5A]">Enlaces</h4>
-          <ul className="space-y-3 text-sm text-gray-300">
+          <h4 className="mb-4 text-base font-bold text-[#9FCD5A] sm:mb-6 sm:text-lg lg:text-xl">Enlaces</h4>
+          <ul className="space-y-2 text-xs text-gray-300 sm:space-y-3 sm:text-sm lg:text-base">
             {["Portal del Paciente", "Staff Médico", "Obras Sociales", "Novedades", "Trabajá con Nosotros"].map((item) => (
               <li key={item}>
                 <a href="#" className="flex items-center gap-2 transition-all hover:pl-2 hover:text-[#9FCD5A]">
@@ -1709,24 +1710,24 @@ function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="mb-6 text-lg font-bold text-[#9FCD5A]">Horarios</h4>
-          <div className="space-y-3 rounded-xl border border-white/5 bg-white/5 p-4 backdrop-blur-sm">
-            <div className="flex items-center justify-between text-sm">
+          <h4 className="mb-4 text-base font-bold text-[#9FCD5A] sm:mb-6 sm:text-lg lg:text-xl">Horarios</h4>
+          <div className="space-y-2 rounded-xl border border-white/5 bg-white/5 p-3 backdrop-blur-sm sm:space-y-3 sm:p-4">
+            <div className="flex items-center justify-between text-xs sm:text-sm">
               <span className="font-bold text-white">Guardia</span>
               <span className="rounded bg-[#9FCD5A] px-2 py-1 text-xs font-bold text-white">24 HS</span>
             </div>
-            <div className="my-2 h-px bg-white/10" />
-            <div className="flex justify-between text-sm text-gray-300">
+            <div className="my-1.5 h-px bg-white/10 sm:my-2" />
+            <div className="flex justify-between text-xs text-gray-300 sm:text-sm">
               <span>Laboratorio</span> <span>7:00 - 20:00</span>
             </div>
-            <div className="flex justify-between text-sm text-gray-300">
+            <div className="flex justify-between text-xs text-gray-300 sm:text-sm">
               <span>Consultorios</span> <span>8:00 - 21:00</span>
             </div>
           </div>
         </div>
       </div>
-      <div className="mt-16 border-t border-white/10 pt-8 text-center">
-        <p className="text-xs text-gray-400">© {new Date().getFullYear()} Todos los derechos reservados.</p>
+      <div className="mt-12 border-t border-white/10 pt-6 text-center sm:mt-16 sm:pt-8">
+        <p className="text-xs text-gray-400 sm:text-sm">© {new Date().getFullYear()} Todos los derechos reservados.</p>
       </div>
     </footer>
   );
