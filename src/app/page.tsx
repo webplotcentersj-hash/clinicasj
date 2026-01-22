@@ -1247,8 +1247,8 @@ function ObrasSocialesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                 >
                   <Phone size={18} />
                   Llamar: 0264-4222222
-                </a>
-              </div>
+          </a>
+        </div>
             </div>
           </div>
 
@@ -1919,23 +1919,23 @@ function GeminiAssistant() {
     <>
       <button
         onClick={() => setIsOpen((v) => !v)}
-        className="fixed bottom-8 right-8 z-50 flex h-16 w-16 items-center justify-center rounded-full shadow-2xl ring-4 ring-white/50 transition-transform hover:scale-110"
+        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-2xl ring-3 ring-white/50 transition-transform hover:scale-110 sm:bottom-8 sm:right-8 sm:h-16 sm:w-16 sm:ring-4"
         style={{ background: `linear-gradient(135deg, ${COLORS.blue}, ${COLORS.green})` }}
         type="button"
       >
-        {isOpen ? <X size={32} color="white" /> : <Bot size={32} color="white" />}
+        {isOpen ? <X size={24} color="white" className="sm:size-8" /> : <Bot size={24} color="white" className="sm:size-8" />}
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-28 right-8 z-50 flex h-[550px] w-80 flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl md:h-[600px] md:w-96 lg:bottom-8 lg:right-12 lg:h-[700px] lg:w-[500px] xl:w-[600px]">
-          <div className="flex items-center justify-between bg-gradient-to-r from-[#447FC1] to-[#6FA8DC] p-4 text-white lg:p-6">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm lg:h-12 lg:w-12">
-                <Bot size={24} className="text-white lg:size-7" />
+        <div className="fixed bottom-24 right-6 z-50 flex h-[450px] w-72 flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl sm:h-[500px] sm:w-80 md:bottom-8 md:right-8 md:h-[520px] md:w-[360px] lg:h-[560px] lg:w-[400px]">
+          <div className="flex items-center justify-between bg-gradient-to-r from-[#447FC1] to-[#6FA8DC] p-3 text-white sm:p-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm sm:h-10 sm:w-10">
+                <Bot size={18} className="text-white sm:size-6" />
               </div>
               <div>
-                <span className="block text-lg font-bold lg:text-xl">Asistente Virtual</span>
-                <span className="text-xs text-white/80 lg:text-sm">Sanatorio San Juan</span>
+                <span className="block text-sm font-bold sm:text-base">Asistente Virtual</span>
+                <span className="text-[10px] text-white/80 sm:text-xs">Sanatorio San Juan</span>
               </div>
             </div>
             <div className="flex flex-col items-end">
@@ -1954,19 +1954,19 @@ function GeminiAssistant() {
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto bg-gray-50 p-4 lg:p-6">
-            <div className="space-y-4 lg:space-y-6">
+          <div className="flex-1 overflow-y-auto bg-gray-50 p-3 sm:p-4">
+            <div className="space-y-3 sm:space-y-4">
               {messages.map((msg) => (
                 <div key={msg.id} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
                   <div
-                    className={`group relative max-w-[85%] rounded-2xl p-3 text-sm leading-relaxed shadow-sm lg:max-w-[75%] lg:p-4 lg:text-base lg:leading-relaxed ${
+                    className={`group relative max-w-[85%] rounded-xl p-2.5 text-xs leading-relaxed shadow-sm sm:max-w-[80%] sm:p-3 sm:text-sm sm:leading-relaxed ${
                       msg.sender === "user"
                         ? "rounded-tr-none bg-[#447FC1] text-white"
                         : "rounded-tl-none border border-gray-100 bg-white text-gray-700"
                     }`}
                   >
                     {msg.text.split("\n").map((line, i) => (
-                      <p key={i} className={i > 0 ? "mt-2 lg:mt-3" : ""}>
+                      <p key={i} className={i > 0 ? "mt-1.5 sm:mt-2" : ""}>
                         {line.split("**").map((part, j) =>
                           j % 2 === 1 ? <strong key={j}>{part}</strong> : part,
                         )}
@@ -2001,25 +2001,25 @@ function GeminiAssistant() {
             </div>
           </div>
 
-          <div className="border-t border-gray-100 bg-white p-3 lg:p-5">
+          <div className="border-t border-gray-100 bg-white p-2.5 sm:p-3">
             {recognitionError && (
-              <div className="mb-2 rounded-lg bg-red-50 p-2 text-xs text-red-600 lg:p-3 lg:text-sm">
+              <div className="mb-2 rounded-lg bg-red-50 p-1.5 text-[10px] text-red-600 sm:p-2 sm:text-xs">
                 {recognitionError}
               </div>
             )}
-            <div className="flex items-center gap-2 rounded-full border border-transparent bg-gray-100 px-2 py-2 pl-4 transition-all focus-within:border-[#447FC1] focus-within:bg-white lg:gap-3 lg:px-3 lg:py-3 lg:pl-5">
+            <div className="flex items-center gap-1.5 rounded-full border border-transparent bg-gray-100 px-2 py-1.5 pl-3 transition-all focus-within:border-[#447FC1] focus-within:bg-white sm:gap-2 sm:px-2.5 sm:py-2 sm:pl-4">
               <input
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                placeholder={isListening ? "Escuchando..." : "Pregunta sobre turnos, guardia..."}
-                className="flex-1 bg-transparent text-sm text-gray-700 outline-none placeholder-gray-400 lg:text-base"
+                placeholder={isListening ? "Escuchando..." : "Pregunta sobre turnos..."}
+                className="flex-1 bg-transparent text-xs text-gray-700 outline-none placeholder-gray-400 sm:text-sm"
                 disabled={isListening}
               />
               <button
                 onClick={isListening ? stopListening : startListening}
-                className={`rounded-full p-2 transition-all lg:p-2.5 ${
+                className={`rounded-full p-1.5 transition-all sm:p-2 ${
                   isListening
                     ? "bg-red-100 text-red-600 animate-pulse"
                     : "text-gray-400 hover:bg-gray-100 hover:text-[#447FC1]"
@@ -2027,25 +2027,25 @@ function GeminiAssistant() {
                 type="button"
                 title={isListening ? "Detener grabación" : "Hablar con el micrófono"}
               >
-                <Mic size={18} className={`lg:size-5 ${isListening ? "animate-pulse" : ""}`} />
+                <Mic size={16} className={`sm:size-4 ${isListening ? "animate-pulse" : ""}`} />
               </button>
               <button
                 onClick={handleSend}
                 disabled={!inputText.trim() || isListening}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#9FCD5A] text-white transition-all hover:bg-[#8ec049] hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed lg:h-12 lg:w-12"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#9FCD5A] text-white transition-all hover:bg-[#8ec049] hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed sm:h-9 sm:w-9"
                 type="button"
               >
-                <Send size={16} className="lg:size-5" />
+                <Send size={14} className="sm:size-4" />
               </button>
             </div>
             {isListening && (
-              <div className="mt-2 flex items-center justify-center gap-2 lg:mt-3">
-                <div className="h-2 w-2 animate-pulse rounded-full bg-red-500 lg:h-2.5 lg:w-2.5" />
-                <span className="text-xs text-red-600 lg:text-sm">Grabando... Habla ahora</span>
+              <div className="mt-1.5 flex items-center justify-center gap-1.5 sm:mt-2">
+                <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500 sm:h-2 sm:w-2" />
+                <span className="text-[10px] text-red-600 sm:text-xs">Grabando...</span>
               </div>
             )}
-            <div className="mt-2 text-center lg:mt-3">
-              <span className="text-[10px] text-gray-400 lg:text-xs">Powered by Plot Center Technology</span>
+            <div className="mt-1.5 text-center sm:mt-2">
+              <span className="text-[9px] text-gray-400 sm:text-[10px]">Powered by Plot Center</span>
             </div>
           </div>
         </div>
