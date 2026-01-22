@@ -768,15 +768,15 @@ function Header() {
               />
             </a>
           ))}
-          <button
+          <a
+            href="/portal"
             className="flex items-center gap-2 rounded-full px-4 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-3.5 text-sm md:text-base font-bold text-white shadow-xl transition-all hover:scale-105 hover:shadow-green-500/30"
             style={{ backgroundColor: COLORS.green }}
-            type="button"
           >
             <Calendar size={16} className="md:size-5" />
             <span className="hidden lg:inline">Portal Paciente</span>
             <span className="lg:hidden">Portal</span>
-          </button>
+          </a>
         </nav>
 
         <button
@@ -804,13 +804,13 @@ function Header() {
               {item.label}
             </a>
           ))}
-          <button
-            className="w-4/5 rounded-full px-10 py-4 text-lg font-bold text-white shadow-lg"
+          <a
+            href="/portal"
+            className="w-4/5 rounded-full px-10 py-4 text-lg font-bold text-white shadow-lg text-center"
             style={{ backgroundColor: COLORS.green }}
-            type="button"
           >
             Portal Paciente
-          </button>
+          </a>
         </div>
       )}
     </header>
