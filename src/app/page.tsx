@@ -72,6 +72,11 @@ import {
   Volume2,
   VolumeX,
   X,
+  Award,
+  Briefcase,
+  GraduationCap,
+  Search,
+  Filter,
 } from "lucide-react";
 
 function TurnosModal({
@@ -998,7 +1003,7 @@ function QuickLinks() {
           {cards.map((card) => (
             <a
               key={card.title}
-              href="#"
+              href={card.title === "Staff Médico" ? "#staff-medico" : "#"}
               className={`group relative flex h-40 flex-col justify-center overflow-hidden rounded-2xl px-6 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl sm:h-48 sm:px-8 md:h-52 lg:h-56 lg:px-10 ${card.bgColor} ${card.hoverColor}`}
             >
               <div className="absolute right-0 top-0 translate-x-4 -translate-y-4 p-4 opacity-10 transition-transform duration-500 group-hover:scale-150">
@@ -1221,6 +1226,189 @@ function Services() {
             desc="Atención integral para el cuidado de tu salud con profesionales de primer nivel."
             color="blue"
           />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StaffMedico() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const staff = [
+    { nombre: "Dr. Jorge Alejandro Bellotti", cargo: "Jefe de Terapia Intensiva", categoria: "Jefatura", icon: Award },
+    { nombre: "Dr. Andrés Escudero", cargo: "Jefe de Clínica Médica", categoria: "Jefatura", icon: Award },
+    { nombre: "Ing. Álvaro Vega", cargo: "Gerente", categoria: "Administración", icon: Briefcase },
+    { nombre: "Dr. Jorge Ferreyra", cargo: "Jefe de Diagnóstico por Imagen", categoria: "Jefatura", icon: Award },
+    { nombre: "Lic. Emilio Quijano", cargo: "Radiólogo", categoria: "Especialistas", icon: Stethoscope },
+    { nombre: "Lic. Mónica Tubio", cargo: "Radióloga", categoria: "Especialistas", icon: Stethoscope },
+    { nombre: "Dr. Diego Martinez", cargo: "Subjefe de Terapia", categoria: "Jefatura", icon: Award },
+    { nombre: "Verónica Morales", cargo: "Jefa de Instrumentadores", categoria: "Jefatura", icon: Award },
+    { nombre: "Prof. María Camila Lillo", cargo: "Educación Física Adaptada a la Salud", categoria: "Especialistas", icon: GraduationCap },
+    { nombre: "Dra. Leticia Álvarez", cargo: "Obesidad", categoria: "Especialistas", icon: Stethoscope },
+    { nombre: "Lic. Cecilia Sierra", cargo: "Servicio de Soporte Nutricional", categoria: "Especialistas", icon: Stethoscope },
+    { nombre: "Dr. Daniel Palma", cargo: "Jefe de Quirófano", categoria: "Jefatura", icon: Award },
+    { nombre: "Dr. Antonio Archilla", cargo: "Jefe de Hematología y Hemoterapia", categoria: "Jefatura", icon: Award },
+    { nombre: "Dr. Alfredo Laplagne", cargo: "Jefe de Hematología y Hemoterapia", categoria: "Jefatura", icon: Award },
+    { nombre: "Dra. Adriana Manzur", cargo: "Infectología", categoria: "Especialistas", icon: Stethoscope },
+    { nombre: "Lic. Susana Zabala", cargo: "Jefa de Enfermería - Internado", categoria: "Jefatura", icon: Award },
+    { nombre: "Lic. Carolina Álamo", cargo: "Jefa de Enfermería - Internado", categoria: "Jefatura", icon: Award },
+    { nombre: "Lic. Susana Zabala", cargo: "Encargada de Control de Infecciones", categoria: "Jefatura", icon: Award },
+    { nombre: "Lic. Andrea Balmaceda", cargo: "Jefa de Enfermería de Terapia Intensiva", categoria: "Jefatura", icon: Award },
+    { nombre: "Lic. Gabriel López", cargo: "Jefe de Farmacia", categoria: "Jefatura", icon: Award },
+  ];
+
+  const categories = ["all", "Jefatura", "Especialistas", "Administración"];
+
+  const filteredStaff = staff.filter((person) => {
+    const matchesCategory = selectedCategory === "all" || person.categoria === selectedCategory;
+    const matchesSearch =
+      searchTerm === "" ||
+      person.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      person.cargo.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white py-16 sm:py-20 md:py-24 lg:py-32" id="staff-medico">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-20">
+        <div className="absolute -left-20 -top-20 h-96 w-96 rounded-full bg-[#447FC1]/20 blur-3xl" />
+        <div className="absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-[#9FCD5A]/20 blur-3xl" />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mb-12 text-center sm:mb-16 lg:mb-20">
+          <span className="mb-4 inline-block rounded-full bg-[#447FC1]/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#447FC1] sm:px-5 sm:py-2.5 sm:text-sm">
+            Nuestro Equipo
+          </span>
+          <h2 className="mb-4 text-3xl font-extrabold text-[#727376] sm:text-4xl md:text-5xl lg:text-6xl">
+            Conocé el equipo de <span className="text-[#447FC1]">Sanatorio San Juan</span>
+          </h2>
+          <p className="mx-auto max-w-2xl text-base text-gray-600 sm:text-lg lg:text-xl">
+            Profesionales altamente capacitados comprometidos con tu salud y bienestar
+          </p>
+        </div>
+
+        {/* Filtros y Búsqueda */}
+        <div className="mb-8 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-center sm:justify-between lg:mb-16">
+          {/* Búsqueda */}
+          <div className="relative flex-1 sm:max-w-md">
+            <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Buscar por nombre o cargo..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-3 pl-12 text-sm transition-all focus:border-[#447FC1] focus:outline-none focus:ring-2 focus:ring-[#447FC1]/20 sm:text-base"
+            />
+          </div>
+
+          {/* Filtros por categoría */}
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-all sm:px-6 sm:py-2.5 sm:text-base ${
+                  selectedCategory === category
+                    ? "bg-[#447FC1] text-white shadow-lg"
+                    : "bg-white text-gray-700 shadow-sm hover:bg-gray-50"
+                }`}
+              >
+                <Filter size={16} />
+                {category === "all" ? "Todos" : category}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Grid de Staff */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {filteredStaff.map((person, index) => {
+            const Icon = person.icon;
+            const isJefatura = person.categoria === "Jefatura";
+            const isAdmin = person.categoria === "Administración";
+
+            return (
+              <div
+                key={`${person.nombre}-${index}`}
+                className="group relative overflow-hidden rounded-2xl border-2 border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#447FC1] hover:shadow-2xl sm:p-8"
+              >
+                {/* Gradiente de fondo animado */}
+                <div
+                  className={`absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+                    isJefatura
+                      ? "bg-gradient-to-br from-[#447FC1]/10 to-[#9FCD5A]/10"
+                      : isAdmin
+                        ? "bg-gradient-to-br from-[#727376]/10 to-[#447FC1]/10"
+                        : "bg-gradient-to-br from-[#9FCD5A]/10 to-[#447FC1]/10"
+                  }`}
+                />
+
+                {/* Badge de categoría */}
+                <div className="relative mb-4 flex items-start justify-between">
+                  <span
+                    className={`inline-block rounded-full px-3 py-1 text-xs font-bold ${
+                      isJefatura
+                        ? "bg-[#447FC1]/10 text-[#447FC1]"
+                        : isAdmin
+                          ? "bg-[#727376]/10 text-[#727376]"
+                          : "bg-[#9FCD5A]/10 text-[#9FCD5A]"
+                    }`}
+                  >
+                    {person.categoria}
+                  </span>
+                  {isJefatura && (
+                    <Award className="h-5 w-5 text-[#447FC1] transition-transform duration-300 group-hover:rotate-12" />
+                  )}
+                </div>
+
+                {/* Icono */}
+                <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#447FC1] to-[#9FCD5A] text-white shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <Icon size={28} />
+                </div>
+
+                {/* Información */}
+                <div className="relative">
+                  <h3 className="mb-2 text-lg font-bold text-gray-800 transition-colors group-hover:text-[#447FC1] sm:text-xl">
+                    {person.nombre}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-gray-600 sm:text-base">{person.cargo}</p>
+                </div>
+
+                {/* Efecto de brillo al hover */}
+                <div className="absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-r from-[#447FC1] via-[#9FCD5A] to-[#447FC1] opacity-0 blur transition-opacity duration-300 group-hover:opacity-20" />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Mensaje si no hay resultados */}
+        {filteredStaff.length === 0 && (
+          <div className="py-12 text-center">
+            <p className="text-lg font-semibold text-gray-500">No se encontraron resultados</p>
+            <p className="mt-2 text-sm text-gray-400">Intenta con otros términos de búsqueda</p>
+          </div>
+        )}
+
+        {/* Estadísticas */}
+        <div className="mt-12 grid grid-cols-2 gap-4 sm:mt-16 sm:grid-cols-4 lg:mt-20">
+          {[
+            { label: "Jefes de Área", value: staff.filter((s) => s.categoria === "Jefatura").length },
+            { label: "Especialistas", value: staff.filter((s) => s.categoria === "Especialistas").length },
+            { label: "Administración", value: staff.filter((s) => s.categoria === "Administración").length },
+            { label: "Total", value: staff.length },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-xl border border-gray-200 bg-white p-4 text-center shadow-sm transition-all hover:shadow-md sm:p-6"
+            >
+              <div className="mb-2 text-3xl font-extrabold text-[#447FC1] sm:text-4xl">{stat.value}</div>
+              <div className="text-xs font-semibold text-gray-600 sm:text-sm">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -1741,6 +1929,7 @@ export default function Page() {
       <QuickLinks />
       <Institucional />
       <Services />
+      <StaffMedico />
       <Technology />
       <GalleryCarousel />
       <Footer />
