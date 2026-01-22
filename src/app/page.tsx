@@ -77,6 +77,10 @@ import {
   GraduationCap,
   Search,
   Filter,
+  Building2,
+  Shield,
+  CheckCircle,
+  PhoneCall,
 } from "lucide-react";
 
 function TurnosModal({
@@ -1155,8 +1159,257 @@ function StaffMedicoModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
   );
 }
 
+function ObrasSocialesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const obrasSociales = [
+    { nombre: "Obra Social Provincia", tipo: "Obra Social", icon: Building2, destacada: true },
+    { nombre: "OSDE", tipo: "Prepaga", icon: Shield, destacada: true },
+    { nombre: "Swiss Medical", tipo: "Prepaga", icon: Shield, destacada: true },
+    { nombre: "Galeno", tipo: "Prepaga", icon: Shield, destacada: true },
+    { nombre: "Sancor Salud", tipo: "Prepaga", icon: Shield, destacada: false },
+    { nombre: "PAMI", tipo: "Obra Social", icon: Building2, destacada: false },
+    { nombre: "IOMA", tipo: "Obra Social", icon: Building2, destacada: false },
+    { nombre: "OSECAC", tipo: "Obra Social", icon: Building2, destacada: false },
+    { nombre: "OSPE", tipo: "Obra Social", icon: Building2, destacada: false },
+    { nombre: "OSPLAD", tipo: "Obra Social", icon: Building2, destacada: false },
+    { nombre: "OSPRERA", tipo: "Obra Social", icon: Building2, destacada: false },
+    { nombre: "OSPREN", tipo: "Obra Social", icon: Building2, destacada: false },
+    { nombre: "OSPRERA", tipo: "Obra Social", icon: Building2, destacada: false },
+    { nombre: "OSDE 210", tipo: "Prepaga", icon: Shield, destacada: false },
+    { nombre: "OSDE 310", tipo: "Prepaga", icon: Shield, destacada: false },
+    { nombre: "OSDE 410", tipo: "Prepaga", icon: Shield, destacada: false },
+    { nombre: "OSDE 450", tipo: "Prepaga", icon: Shield, destacada: false },
+    { nombre: "Medicus", tipo: "Prepaga", icon: Shield, destacada: false },
+    { nombre: "Omint", tipo: "Prepaga", icon: Shield, destacada: false },
+    { nombre: "Prevención Salud", tipo: "Prepaga", icon: Shield, destacada: false },
+    { nombre: "Accord Salud", tipo: "Prepaga", icon: Shield, destacada: false },
+    { nombre: "DASUTEN", tipo: "Obra Social", icon: Building2, destacada: false },
+    { nombre: "OSDEBA", tipo: "Obra Social", icon: Building2, destacada: false },
+  ];
+
+  const categories = ["all", "Obra Social", "Prepaga"];
+
+  const filteredObras = obrasSociales.filter((obra) => {
+    const matchesCategory = selectedCategory === "all" || obra.tipo === selectedCategory;
+    const matchesSearch =
+      searchTerm === "" ||
+      obra.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      obra.tipo.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative z-10 w-full max-w-6xl max-h-[90vh] overflow-hidden rounded-3xl bg-white shadow-2xl">
+        {/* Header del Modal */}
+        <div className="sticky top-0 z-20 flex items-center justify-between border-b border-gray-200 bg-gradient-to-r from-[#9FCD5A] to-[#447FC1] px-6 py-4 sm:px-8 sm:py-6">
+          <div>
+            <h2 className="text-2xl font-extrabold text-white sm:text-3xl lg:text-4xl">
+              Obras Sociales y <span className="text-white">Prepagas</span>
+            </h2>
+            <p className="mt-1 text-sm text-white/90 sm:text-base">
+              Consultá las coberturas y convenios disponibles
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white transition-all hover:bg-white/30 hover:scale-110"
+            type="button"
+            aria-label="Cerrar"
+          >
+            <X size={24} />
+          </button>
+        </div>
+
+        {/* Contenido con scroll */}
+        <div className="max-h-[calc(90vh-120px)] overflow-y-auto p-6 sm:p-8">
+          {/* Información importante */}
+          <div className="mb-6 rounded-2xl border-2 border-[#9FCD5A] bg-gradient-to-r from-[#9FCD5A]/10 to-[#447FC1]/10 p-6 sm:mb-8 sm:p-8">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#447FC1] text-white shadow-lg sm:h-14 sm:w-14">
+                <PhoneCall size={24} className="sm:size-7" />
+              </div>
+              <div className="flex-1">
+                <h3 className="mb-2 text-lg font-bold text-gray-800 sm:text-xl">
+                  ¿Tu obra social no aparece en la lista?
+                </h3>
+                <p className="mb-3 text-sm leading-relaxed text-gray-700 sm:text-base">
+                  Contactá a nuestro departamento de administración para consultar sobre tu cobertura específica o para obtener más información sobre tu plan.
+                </p>
+                <a
+                  href="tel:02644222222"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#447FC1] px-4 py-2 text-sm font-bold text-white transition-all hover:bg-[#35669e] hover:shadow-lg sm:px-6 sm:py-2.5 sm:text-base"
+                >
+                  <Phone size={18} />
+                  Llamar: 0264-4222222
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Filtros y Búsqueda */}
+          <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
+            <div className="relative flex-1 sm:max-w-md">
+              <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Buscar obra social o prepaga..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-3 pl-12 text-sm transition-all focus:border-[#9FCD5A] focus:outline-none focus:ring-2 focus:ring-[#9FCD5A]/20 sm:text-base"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-all sm:px-6 sm:py-2.5 sm:text-base ${
+                    selectedCategory === category
+                      ? "bg-[#9FCD5A] text-white shadow-lg"
+                      : "bg-gray-100 text-gray-700 shadow-sm hover:bg-gray-200"
+                  }`}
+                >
+                  <Filter size={16} />
+                  {category === "all" ? "Todas" : category}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Grid de Obras Sociales */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filteredObras.map((obra, index) => {
+              const Icon = obra.icon;
+              const isObraSocial = obra.tipo === "Obra Social";
+              const isPrepaga = obra.tipo === "Prepaga";
+
+              return (
+                <div
+                  key={`${obra.nombre}-${index}`}
+                  className={`group relative overflow-hidden rounded-2xl border-2 bg-white p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl sm:p-6 ${
+                    obra.destacada
+                      ? "border-[#9FCD5A] bg-gradient-to-br from-[#9FCD5A]/5 to-[#447FC1]/5"
+                      : "border-gray-100"
+                  } ${obra.destacada ? "hover:border-[#9FCD5A]" : "hover:border-[#447FC1]"}`}
+                >
+                  {/* Badge destacada */}
+                  {obra.destacada && (
+                    <div className="absolute right-3 top-3 z-10">
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#9FCD5A] text-white shadow-md">
+                        <CheckCircle size={14} />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Gradiente de fondo animado */}
+                  <div
+                    className={`absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+                      isObraSocial
+                        ? "bg-gradient-to-br from-[#9FCD5A]/10 to-[#447FC1]/10"
+                        : "bg-gradient-to-br from-[#447FC1]/10 to-[#9FCD5A]/10"
+                    }`}
+                  />
+
+                  {/* Badge de tipo */}
+                  <div className="relative mb-3 flex items-start justify-between">
+                    <span
+                      className={`inline-block rounded-full px-2.5 py-1 text-xs font-bold ${
+                        isObraSocial
+                          ? "bg-[#9FCD5A]/10 text-[#9FCD5A]"
+                          : "bg-[#447FC1]/10 text-[#447FC1]"
+                      }`}
+                    >
+                      {obra.tipo}
+                    </span>
+                  </div>
+
+                  {/* Icono */}
+                  <div
+                    className={`relative mb-3 flex h-14 w-14 items-center justify-center rounded-xl text-white shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${
+                      isObraSocial
+                        ? "bg-gradient-to-br from-[#9FCD5A] to-[#7db848]"
+                        : "bg-gradient-to-br from-[#447FC1] to-[#35669e]"
+                    }`}
+                  >
+                    <Icon size={24} />
+                  </div>
+
+                  {/* Información */}
+                  <div className="relative">
+                    <h3 className="mb-1.5 text-base font-bold text-gray-800 transition-colors group-hover:text-[#447FC1] sm:text-lg">
+                      {obra.nombre}
+                    </h3>
+                    {obra.destacada && (
+                      <p className="text-xs font-semibold text-[#9FCD5A] sm:text-sm">Cobertura destacada</p>
+                    )}
+                  </div>
+
+                  {/* Efecto de brillo al hover */}
+                  <div
+                    className={`absolute -inset-1 -z-10 rounded-2xl opacity-0 blur transition-opacity duration-300 group-hover:opacity-20 ${
+                      isObraSocial
+                        ? "bg-gradient-to-r from-[#9FCD5A] via-[#447FC1] to-[#9FCD5A]"
+                        : "bg-gradient-to-r from-[#447FC1] via-[#9FCD5A] to-[#447FC1]"
+                    }`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mensaje si no hay resultados */}
+          {filteredObras.length === 0 && (
+            <div className="py-12 text-center">
+              <p className="text-lg font-semibold text-gray-500">No se encontraron resultados</p>
+              <p className="mt-2 text-sm text-gray-400">Intenta con otros términos de búsqueda</p>
+            </div>
+          )}
+
+          {/* Estadísticas */}
+          <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-10 sm:grid-cols-4">
+            {[
+              {
+                label: "Obras Sociales",
+                value: obrasSociales.filter((o) => o.tipo === "Obra Social").length,
+                color: "text-[#9FCD5A]",
+              },
+              {
+                label: "Prepagas",
+                value: obrasSociales.filter((o) => o.tipo === "Prepaga").length,
+                color: "text-[#447FC1]",
+              },
+              {
+                label: "Destacadas",
+                value: obrasSociales.filter((o) => o.destacada).length,
+                color: "text-[#9FCD5A]",
+              },
+              { label: "Total", value: obrasSociales.length, color: "text-[#447FC1]" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="rounded-xl border border-gray-200 bg-white p-3 text-center shadow-sm transition-all hover:shadow-md sm:p-4"
+              >
+                <div className={`mb-1 text-2xl font-extrabold sm:text-3xl ${stat.color}`}>{stat.value}</div>
+                <div className="text-xs font-semibold text-gray-600 sm:text-sm">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function QuickLinks() {
   const [showStaffModal, setShowStaffModal] = useState(false);
+  const [showObrasModal, setShowObrasModal] = useState(false);
 
   const cards = [
     {
@@ -1173,7 +1426,7 @@ function QuickLinks() {
       bgColor: "bg-[#9FCD5A]",
       hoverColor: "hover:bg-[#8ec049]",
       desc: "Coberturas y convenios",
-      onClick: () => {},
+      onClick: () => setShowObrasModal(true),
     },
     {
       title: "Novedades",
@@ -1188,6 +1441,7 @@ function QuickLinks() {
   return (
     <>
       <StaffMedicoModal isOpen={showStaffModal} onClose={() => setShowStaffModal(false)} />
+      <ObrasSocialesModal isOpen={showObrasModal} onClose={() => setShowObrasModal(false)} />
       <section className="relative z-30 -mt-16 pb-12 sm:-mt-20 sm:pb-16 md:-mt-24 md:pb-20 lg:pb-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3 lg:gap-8">
